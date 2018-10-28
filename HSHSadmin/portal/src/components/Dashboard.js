@@ -9,126 +9,169 @@ import { FloatingActionButtons } from "./dashboard/FloatingActionButtons";
 import { DashboardReport } from "./dashboard/DashboardReport";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import RecentActorsIcon from "@material-ui/icons/RecentActors";
+import AdminIcon from "@material-ui/icons/PermIdentity";
+import GroupIcon from "@material-ui/icons/Group";
+import PropTypes from "prop-types";
+import Grid from "@material-ui/core/Grid";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Paper from "@material-ui/core/Paper";
 
-const drawerWidth = 240;
 const styles = theme => ({
 	root: {
-		flexGrow: 1,
-		height: 440,
-		zIndex: 1,
-		overflow: "hidden",
-		position: "relative",
-		display: "flex"
+		flexGrow: 1
 	},
-	appBar: {
-		zIndex: theme.zIndex.drawer + 1
+	paper: {
+		height: 250,
+		width: 100
 	},
-	drawerPaper: {
-		position: "relative",
-		width: drawerWidth
-	},
-	content: {
-		flexGrow: 1,
-		backgroundColor: theme.palette.background.default,
-		padding: theme.spacing.unit * 3,
-		minWidth: 0 // So the Typography noWrap works
-	},
-	toolbar: theme.mixins.toolbar
+	control: {
+		padding: theme.spacing.unit * 2
+	}
 });
-const iconStyles = {
-	smallIcon: {
-		width: 36,
-		height: 36
-	},
-	mediumIcon: {
-		width: 48,
-		height: 48
-	},
-	largeIcon: {
-		width: 60,
-		height: 60
-	},
-	small: {
-		width: 72,
-		height: 72,
-		padding: 16
-	},
-	medium: {
-		width: 96,
-		height: 96,
-		padding: 24
-	},
-	large: {
-		width: 120,
-		height: 120,
-		padding: 30
-	}
-};
 
-class DashboardPage extends Component {
-	constructor(props) {
-		super(props);
-		let self = this;
-		// if (!firebase.auth().currentUser) {
-		// 	props.history.push(routes.SIGN_IN);
-		// }
-	}
+class DashboardPage extends React.Component {
+	state = {
+		spacing: "40"
+	};
 
 	render() {
+		const { classes } = this.props;
+		const { spacing } = this.state;
+
 		return (
 			<div
 				style={{
-					backgroundColor: "#dce0e2",
 					height: "100%",
 					width: "100%",
-					margin: "auto",
-					alignItems: "center",
-					justifyContent: "space-evenly"
+					backgroundColor: "#dce0e2"
 				}}
 			>
 				<Nav />
-				<main className={styles.content}>
-					<div>
-						<div
+				<div
+					style={{
+						marginLeft: "205px",
+						marginTop: "65px",
+						backgroundColor: "#dce0e2"
+					}}
+				>
+					<Grid
+						container
+						className={classes.root}
+						spacing={16}
+						style={{
+							backgroundColor: "#dce0e2"
+						}}
+					>
+						<Grid
+							item
+							xs={12}
 							style={{
-								marginLeft: "205px",
-								marginTop: "65px"
+								backgroundColor: "#dce0e2"
 							}}
 						>
-							<FloatingActionButtons />
+							<Grid
+								container
+								className={classes.demo}
+								justify="center"
+								spacing={Number(spacing)}
+								style={{
+									backgroundColor: "#dce0e2"
+								}}
+							>
+								<Grid item style={{ padding: "40px" }}>
+									<div style={{ textAlign: "center" }}>
+										<Button
+											href="/volunteers"
+											variant="fab"
+											aria-label="Volunteers"
+											className={styles.button}
+											style={{
+												height: "300px",
+												width: "300px",
+												backgroundColor: "#9e0806",
+												marginTop: "100px"
+											}}
+											color="secondary"
+										>
+											<RecentActorsIcon
+												style={{
+													height: "200px",
+													width: "200px"
+												}}
+											/>
+										</Button>
+										<h1>Volunteers</h1>
+										<h3 style={{ color: "#474747" }}>
+											Access volunteer portal
+										</h3>
+									</div>
+								</Grid>
 
-							{/* <div
-								style={{
-									marginTop: "65px",
-									marginLeft: "50px",
-									marginRight: "40px",
-									width: "640px",
-									display: "inline-block"
-								}}
-							>
-								<DashboardReport />
-							</div>
-							<div
-								style={{
-									marginTop: "65px",
-									marginLeft: "50px",
-									marginRight: "40px",
-									width: "640px",
-									display: "inline-block"
-								}}
-							>
-								<DashboardReport />
-							</div> */}
-						</div>
-					</div>
-				</main>
+								<Grid item style={{ padding: "40px" }}>
+									<div style={{ textAlign: "center" }}>
+										<Button
+											href="/admin"
+											variant="fab"
+											aria-label="Admin"
+											className={styles.button}
+											style={{
+												height: "300px",
+												width: "300px",
+												backgroundColor: "#9e0806",
+												marginTop: "100px"
+											}}
+											color="secondary"
+										>
+											<AdminIcon
+												style={{
+													height: "200px",
+													width: "200px"
+												}}
+											/>
+										</Button>
+										<h1>Admin</h1>
+										<h3 style={{ color: "#474747" }}>Access admin portal</h3>
+									</div>
+								</Grid>
+
+								<Grid item style={{ padding: "40px" }}>
+									<div style={{ textAlign: "center" }}>
+										<Button
+											href="/guests"
+											variant="fab"
+											aria-label="Add"
+											className={styles.button}
+											style={{
+												height: "300px",
+												width: "300px",
+												backgroundColor: "#9e0806",
+												marginTop: "100px"
+											}}
+											color="secondary"
+										>
+											<GroupIcon
+												style={{
+													height: "200px",
+													width: "200px"
+												}}
+											/>
+										</Button>
+										<div>
+											<h1>Guests</h1>
+											<h3 style={{ color: "#474747" }}>Access guest portal</h3>
+										</div>
+									</div>
+								</Grid>
+							</Grid>
+						</Grid>
+					</Grid>
+				</div>
 			</div>
 		);
 	}
-
-	// componentWillUnmount() {
-	// 	if (this.statePromises) this.statePromises.forEach(p => p.cancel());
-	// }
 }
 
-export default withRouter(DashboardPage);
+export default withStyles(styles)(DashboardPage);
