@@ -45,6 +45,8 @@ class VolunteersPage extends Component {
 				<div>
 					<Nav />
 					<main>
+			                        <p>Email must be valid </p>
+                                                Password must be at least 6 characters long
 						<h1>THIS IS VOLUNTEER PAGE</h1>
 						<Button
 							color={"secondary"}
