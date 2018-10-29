@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Nav } from "./navbar/Nav";
+import {CreateUserAccountCard} from './cards/CreateUserAccountCard'
 
 class VolunteersPage extends Component {
 	constructor(props) {
@@ -10,7 +11,7 @@ class VolunteersPage extends Component {
 		let self = this;
 	}
 
-	render() {
+	render(history) {
 		return (
 			<div
 				style={{
@@ -25,6 +26,22 @@ class VolunteersPage extends Component {
 					flexWrap: "wrap"
 				}}
 			>
+                <div
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        flexDirection: "column",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "auto",
+                        //backgroundImage: `url(${Background})`,
+                        backgroundSize: 'cover'
+                        //"url(" + { Background } + ")"
+                        //margin: '10% auto',
+                    }}
+                >
+                    <CreateUserAccountCard history = {history}/>
 				<div>
 					<Nav />
 					<main>
@@ -41,6 +58,7 @@ class VolunteersPage extends Component {
 					</main>
 				</div>
 			</div>
+            </div>
 		);
 	}
 
@@ -48,5 +66,24 @@ class VolunteersPage extends Component {
 	// 	if (this.statePromises) this.statePromises.forEach(p => p.cancel());
 	// }
 }
+/*
+const VolunteersPage = ({ history }) =>
+    <div style={
+        {
+            height: "100%",
+            width: "100%",
+            flexDirection: "column",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto",
+            //backgroundImage: `url(${Background})`,
+            backgroundSize: 'cover'
+            //"url(" + { Background } + ")"
+            //margin: '10% auto',
+        }}>
 
+        <CreateUserAccountCard history = {history}/>
+    </div>
+*/
 export default withRouter(VolunteersPage);
