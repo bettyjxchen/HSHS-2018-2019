@@ -80,13 +80,6 @@ class Nav extends Component {
 					<Divider />
 					<List>{navAccountItems}</List>
 				</Drawer>
-
-				{/* <main className={styles.content}>
-					<div className={styles.toolbar} />
-					<Typography variant="body2" noWrap>
-						{"You think water moves fast? You should see ice."}
-					</Typography>
-				</main> */}
 			</div>
 		);
 	}

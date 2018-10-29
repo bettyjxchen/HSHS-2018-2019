@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Nav } from "./navbar/Nav";
+
 import {CreateAdminAccountCard} from './cards/CreateAdminAccountCard'
 
 class AdminPage extends Component {
@@ -66,24 +67,5 @@ class AdminPage extends Component {
     // 	if (this.statePromises) this.statePromises.forEach(p => p.cancel());
     // }
 }
-/*
-const VolunteersPage = ({ history }) =>
-    <div style={
-        {
-            height: "100%",
-            width: "100%",
-            flexDirection: "column",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "auto",
-            //backgroundImage: `url(${Background})`,
-            backgroundSize: 'cover'
-            //"url(" + { Background } + ")"
-            //margin: '10% auto',
-        }}>
 
-        <CreateUserAccountCard history = {history}/>
-    </div>
-*/
 export default withRouter(AdminPage);

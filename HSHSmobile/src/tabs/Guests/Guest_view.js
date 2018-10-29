@@ -182,7 +182,6 @@ class GuestProfile extends Component {
     // Commented out because it crashes probably bc Jacob Jaffe messed it up
     // Creates a list of actions items in which this guest is tagged
     _renderActionItems() {
-        var actionItems = this.props.actionItems;
         return (
             <ActionItemList_module actionItems={this.props.actionItems}
                             guestActionItemIds={this.props.actionItemIds}
@@ -234,7 +233,6 @@ class GuestProfile extends Component {
                     borderColor: '#3a4548'
                  }}>
                     {this._renderActionItems()}
-                    {/* {this._renderButtons()} */}
                 </View>
                 <View style={{flex: .2, paddingRight: "2%", paddingLeft: "2%"}}>
                     <GuestHistoryModule

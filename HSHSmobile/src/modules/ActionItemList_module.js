@@ -184,7 +184,8 @@ class ActionItemList_module extends Component {
 function getActionItems(IdsToActionItems, guestActionItemIds) {
     var actionItems = [];
     if (guestActionItemIds) {
-        for (var Id in guestActionItemIds) {
+        for (let Id in guestActionItemIds) {
+
             var item = IdsToActionItems[(guestActionItemIds[Id])];
             actionItems.push({
                 title: item.title,

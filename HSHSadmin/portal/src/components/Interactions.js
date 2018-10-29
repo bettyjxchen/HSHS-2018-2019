@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
-import * as firebase from 'firebase';
-import {CheckListCard} from './cards/CheckListCard'
-import ListCard from './cards/ListCard'
+import React, { Component } from "react";
+import * as firebase from "firebase";
+import { CheckListCard } from "./cards/CheckListCard";
+import ListCard from "./cards/ListCard";
 import { Nav } from "./navbar/Nav";
 import Button from "@material-ui/core/Button";
-import SimpleList from './cards/SimpleList';
+import SimpleList from "./cards/SimpleList";
 
 class InteractionsPage extends Component {
-    constructor(props) {
-        super(props);
-        let self = this;
-    }
+	constructor(props) {
+		super(props);
+		let self = this;
+	}
 
-    render() {
-        /*return (
+	render() {
+		/*return (
             <div >
               <ListCard
                   label = "Interactions"
@@ -22,10 +22,10 @@ class InteractionsPage extends Component {
                   style = {{flex: 1, margin: 10}}/>
             </div>
         );*/
-        return (
+		return (
 			<div
 				style={{
-					backgroundColor: "#dce0e2",
+					backgroundColor: "#fff",
 					height: "100%",
 					width: "100%",
 					flexDirection: "row",
@@ -40,18 +40,18 @@ class InteractionsPage extends Component {
 					<Nav />
 					<main>
 						<SimpleList
-                            dataRef = {firebase.database().ref("/interactions")}
-                            hasTitle = {false}/>
+							dataRef={firebase.database().ref("/interactions")}
+							hasTitle={false}
+						/>
 					</main>
 				</div>
 			</div>
 		);
-    }
+	}
 
-    componentWillUnmount() {
-        if (this.statePromises)
-            this.statePromises.forEach(p => p.cancel());
-    }
+	componentWillUnmount() {
+		if (this.statePromises) this.statePromises.forEach(p => p.cancel());
+	}
 }
 
 export default InteractionsPage;
