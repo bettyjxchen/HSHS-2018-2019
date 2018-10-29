@@ -15,7 +15,8 @@ Belen Farias  <br />
 Greg Pickart <br />
 Henry Li <br />
 Linda Cameron <br />
-Jack Zerilli
+Jack Zerilli <br />
+Colton Wolk
 
 
 ## Previous Team Members (Fall 2017 - Spring 2018)
