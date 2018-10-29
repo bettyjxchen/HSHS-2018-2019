@@ -30,10 +30,10 @@ class CreateAdminAccountCard extends Component {
             key,
         } = this.state;
 
-        let makeAdmin = firebase.functions().httpsCallable("makeAdmin");
+        let signUp = firebase.functions().httpsCallable("signUp");
         let authKey = firebase.functions().httpsCallable("authAccountKey");
 
-        makeAdmin({email: email, password: password})
+        signUp({email: email, password: password})
             .then((res) => {return authKey({signupKey : key, uid : res.data})})
             .catch(err => {console.error(err);})
             .then((res) => console.log(res))
