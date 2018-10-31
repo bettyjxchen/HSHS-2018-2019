@@ -80,7 +80,7 @@ class CreateAdminAccountCard extends Component {
                         variant="contained"
                         color="secondary"
                         onClick={this.submit}>
-                        Create Admin
+                        Create New Admin
                     </Button>
                 </CardActions>
             </Card>
