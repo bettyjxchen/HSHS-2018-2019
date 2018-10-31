@@ -80,7 +80,7 @@ class CreateUserAccountCard extends Component {
                         variant="contained"
                         color="secondary"
                         onClick={this.submit}>
-                        Create User
+                        Create New User
                     </Button>
                 </CardActions>
             </Card>
