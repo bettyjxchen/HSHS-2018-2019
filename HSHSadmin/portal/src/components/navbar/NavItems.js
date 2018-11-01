@@ -54,14 +54,14 @@ export const navActionItems = (
 			primary="Volunteers"
 			icon={<RecentActorsIcon />}
 		/>
-		<ListItemLink1 to="/guests" primary="Guests" icon={<GroupIcon />} />
+		{/*<ListItemLink1 to="/guests" primary="Guests" icon={<GroupIcon />} />*/}
 		<ListItemLink1
 			to="interactions"
 			primary="Interactions"
 			icon={<DateIcon />}
 		/>
 		<ListItemLink1 to="/admin" primary="Admin" icon={<AdminIcon />} />
-		<ListItemLink1 to="/reports" primary="Reports" icon={<ReportsIcon />} />
+		{/*<ListItemLink1 to="/reports" primary="Reports" icon={<ReportsIcon />} />*/}
 	</div>
 );
 
