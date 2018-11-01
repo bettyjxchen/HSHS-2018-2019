@@ -69,18 +69,6 @@ export const navAccountItems = (
 	<div>
 		<ListItem button href="#">
 			<ListItemIcon>
-				<PhoneIcon />
-			</ListItemIcon>
-			<ListItemText primary="Contact" />
-		</ListItem>
-		<ListItem button href="#">
-			<ListItemIcon>
-				<SettingsIcon />
-			</ListItemIcon>
-			<ListItemText primary="Settings" />
-		</ListItem>
-		<ListItem button href="#">
-			<ListItemIcon>
 				<LogoutIcon />
 			</ListItemIcon>
 			<ListItemText primary="Logout" />
