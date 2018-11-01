@@ -111,15 +111,7 @@ class SimpleList extends React.Component {
     } else {
         return (
           <div style={{
-              backgroundColor: "#fff",
-              height: "100%",
-              width: "100vw",
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "left",
-              justifyContent: "space-evenly",
-              margin: "auto",
-              flexWrap: "wrap"
+            marginLeft: "13%"
           }}>
             <List>
               {value_array.map(value => (

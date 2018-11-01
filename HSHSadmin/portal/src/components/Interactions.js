@@ -25,20 +25,11 @@ class InteractionsPage extends Component {
 		);*/
 
     var user = firebase.auth().currentUser;
-    if (user) {
+    // if (user) {
       return (
         <div
           style={{
-            backgroundColor: "#fff",
-            height: "100%",
-            width: "100%",
-            flexDirection: "row",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
             marginTop: "5%",
-            //margin: "auto",
-            flexWrap: "wrap"
           }}
         >
           <div>
