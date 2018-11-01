@@ -58,7 +58,6 @@ export default class ChooseLocation extends Component {
             json => {
                 let address_component = json.results[0].address_components[0].short_name + " " + json.results[0].address_components[1].short_name;
                 this.props.onChangeLocation(address_component, coordinate);
-                alert(address_component);
             },
             error => {
                 Alert.alert(error);
