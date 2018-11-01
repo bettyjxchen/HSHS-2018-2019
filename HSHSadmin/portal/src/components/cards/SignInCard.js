@@ -34,6 +34,7 @@ class SignInCard extends Component {
       .then(() => {
         return firebase.auth().signInWithEmailAndPassword(email, password);
       })
+
       .then(() => {
         firebase
           .auth()
@@ -60,7 +61,7 @@ class SignInCard extends Component {
           });
       })
       .catch(error => {
-        console.error(error);
+        alert('Invalid Credentials')
       });
 
     event.preventDefault();
