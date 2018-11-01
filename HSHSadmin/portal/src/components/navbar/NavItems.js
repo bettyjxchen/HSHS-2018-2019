@@ -1,4 +1,5 @@
 import React from "react";
+import * as firebase from "firebase";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -23,11 +24,15 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 class ListItemLink1 extends React.Component {
 	renderLink = itemProps => <Link to={this.props.to} {...itemProps} />;
 
+	onClickFunc = itemProps => {this.props.func}
+
 	render() {
 		const { icon, primary } = this.props;
 		return (
 			<li>
-				<ListItem button component={this.renderLink}>
+				<ListItem button component={this.renderLink} onClick= {() => {		if (this.props.func) {
+			this.props.func();
+		}}}>
 					<ListItemIcon>{icon}</ListItemIcon>
 					<ListItemText primary={primary} />
 				</ListItem>
@@ -39,7 +44,8 @@ class ListItemLink1 extends React.Component {
 ListItemLink1.propTypes = {
 	icon: PropTypes.node.isRequired,
 	primary: PropTypes.node.isRequired,
-	to: PropTypes.string.isRequired
+	to: PropTypes.string.isRequired,
+	func: PropTypes.func
 };
 
 export const navActionItems = (
@@ -71,6 +77,7 @@ export const navAccountItems = (
 			to="/logout"
 			primary="Logout"
 			icon={<LogoutIcon />}
+			func = {() => firebase.auth().signOut()}
 		/>
 	</div>
 );
