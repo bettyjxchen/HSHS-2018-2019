@@ -18,6 +18,7 @@ const App = () => (
 	<Router>
 		<div style={{ height: "100%", width: "100%" }}>
 			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+			<Route exact path={routes.LOGOUT} component={() => <SignInPage />} />
 			<Route exact path={routes.PANEL} component={() => <PanelPage />} />
 			<Route
 				exact

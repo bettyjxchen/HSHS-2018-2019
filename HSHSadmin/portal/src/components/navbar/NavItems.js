@@ -67,12 +67,11 @@ export const navActionItems = (
 
 export const navAccountItems = (
 	<div>
-		<ListItem button href="#">
-			<ListItemIcon>
-				<LogoutIcon />
-			</ListItemIcon>
-			<ListItemText primary="Logout" />
-		</ListItem>
+		<ListItemLink1
+			to="/logout"
+			primary="Logout"
+			icon={<LogoutIcon />}
+		/>
 	</div>
 );
 

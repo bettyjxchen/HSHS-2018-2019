@@ -6,3 +6,4 @@ export const GUESTS = "/guests";
 export const INTERACTIONS = "/interactions";
 export const ADMIN = "/admin";
 export const REPORTS = "/reports";
+export const LOGOUT = "/logout";
