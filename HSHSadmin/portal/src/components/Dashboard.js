@@ -90,8 +90,8 @@ class DashboardPage extends React.Component {
                         aria-label="Volunteers"
                         className={styles.button}
                         style={{
-                          height: "300px",
-                          width: "300px",
+                          height: "200px",
+                          width: "200px",
                           backgroundColor: "#9e0806",
                           marginTop: "100px"
                         }}
@@ -99,8 +99,8 @@ class DashboardPage extends React.Component {
                       >
                         <RecentActorsIcon
                           style={{
-                            height: "200px",
-                            width: "200px"
+                            height: "100px",
+                            width: "100px"
                           }}
                         />
                       </Button>
@@ -119,8 +119,8 @@ class DashboardPage extends React.Component {
                         aria-label="Admin"
                         className={styles.button}
                         style={{
-                          height: "300px",
-                          width: "300px",
+                          height: "200px",
+                          width: "200px",
                           backgroundColor: "#9e0806",
                           marginTop: "100px"
                         }}
@@ -128,8 +128,8 @@ class DashboardPage extends React.Component {
                       >
                         <AdminIcon
                           style={{
-                            height: "200px",
-                            width: "200px"
+                            height: "100px",
+                            width: "100px"
                           }}
                         />
                       </Button>
@@ -146,8 +146,8 @@ class DashboardPage extends React.Component {
                         aria-label="Add"
                         className={styles.button}
                         style={{
-                          height: "300px",
-                          width: "300px",
+                          height: "200px",
+                          width: "200px",
                           backgroundColor: "#9e0806",
                           marginTop: "100px"
                         }}
@@ -155,8 +155,8 @@ class DashboardPage extends React.Component {
                       >
                         <GroupIcon
                           style={{
-                            height: "200px",
-                            width: "200px"
+                            height: "100px",
+                            width: "100px"
                           }}
                         />
                       </Button>
