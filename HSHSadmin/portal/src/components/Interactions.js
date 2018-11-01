@@ -25,7 +25,7 @@ class InteractionsPage extends Component {
 		);*/
 
     var user = firebase.auth().currentUser;
-    // if (user) {
+    if (user) {
       return (
         <div
           style={{
