@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import * as firebase from "firebase";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -51,7 +51,7 @@ class AdminPage extends Component {
               <main>
                 <p>Email must be valid </p>
                 Password must be at least 6 characters long
-                <h1>THIS IS ADMIN PAGE</h1>
+                <p></p>
                 <Button
                   color={"secondary"}
                   size={"large"}
@@ -70,6 +70,8 @@ class AdminPage extends Component {
       alert(
         "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
       );
+      return <Redirect to='/'  />
+
     }
   }
 }

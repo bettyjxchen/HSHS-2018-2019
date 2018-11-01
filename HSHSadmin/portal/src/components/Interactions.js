@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import * as firebase from "firebase";
 import { CheckListCard } from "./cards/CheckListCard";
 import ListCard from "./cards/ListCard";
@@ -55,6 +56,8 @@ class InteractionsPage extends Component {
       alert(
         "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
       );
+      return <Redirect to='/'  />
+
     }
   }
 

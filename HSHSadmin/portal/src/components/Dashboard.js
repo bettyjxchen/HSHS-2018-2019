@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import * as firebase from "firebase";
@@ -175,9 +175,11 @@ class DashboardPage extends React.Component {
         </div>
       );
     } else {
-      alert(
-        "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
-      );
+		alert(
+			"Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
+		  );
+		  
+		return <Redirect to='/'  />
     }
   }
 }
