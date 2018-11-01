@@ -35,7 +35,8 @@ class InteractionsPage extends Component {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-evenly",
-            margin: "auto",
+            marginTop: "5%",
+            //margin: "auto",
             flexWrap: "wrap"
           }}
         >
