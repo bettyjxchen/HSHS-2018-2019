@@ -40,16 +40,31 @@ class SimpleList extends React.Component {
             var newContent = this.state.listContent;
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
+            var resources = Array.from(childData.resources);
+            var new_resources = [];
+            var resource_text = '';
+            resources.forEach(element => {
+                if (element.count !== 0) {
+                    new_resources.push(element);
+                }
+            });
+            new_resources.forEach(element => {
+                if (new_resources.indexOf(element) != (new_resources.length - 1))
+                    resource_text += element.count.toString() + ' ' + element.name + ', ';
+                else
+                    resource_text += element.count.toString() + ' ' + element.name + '.';
+            });
             if (childData.guestIds != null) {
                 firebase.database().ref("/guests/" + childData.guestIds[0]).once('value').then(function(guest_snapshot) {
                     var guest = guest_snapshot.val();
-                    newContent[childKey] = {interaction: childData, guest: guest};
+                    newContent[childKey] = {interaction: childData, guest: guest, resources: resource_text};
                     self.setState({
                       listContent: newContent
                     });
                 });
             } else {
-                newContent[childKey] = {interaction: childData, guest: "No guest tagged"};
+                var guest = {name: "No guest tagged"};
+                newContent[childKey] = {interaction: childData, guest: guest, resources: resource_text};
             }
           });
       });
@@ -59,7 +74,8 @@ class SimpleList extends React.Component {
       const message = "Description: " + value.interaction.description
                     + "\nCreated on: " + value.interaction.creationTimestamp
                     + "\nLocation: " + value.interaction.locationStr
-                    + "\nGuest: " + value.guest.name;
+                    + "\nGuest: " + value.guest.name
+                    + "\nResources given out: " + value.resources;
       alert(message);
   };
 
@@ -68,7 +84,6 @@ class SimpleList extends React.Component {
     const listContent = this.state.listContent;
     var key_array = [];
     var value_array = [];
-    var guest_array = [];
     for (var key in listContent) {
         key_array.push(key);
         value_array.push(listContent[key]);
@@ -86,7 +101,8 @@ class SimpleList extends React.Component {
                   button
                   onClick={this.handleToggle}
                 >
-                  <ListItemText primary={`${value.interaction.title}`} secondary={`${value.interaction.description} | ${value.interaction.creationTimestamp} | ${value.interaction.locationStr} | ${value.guest.name}`} />
+                  <ListItemText primary={`${value.interaction.title}`}
+                                secondary={`${value.interaction.description} | ${value.interaction.creationTimestamp} | ${value.interaction.locationStr} | ${value.guest.name} | ${value.resources}`} />
                 </ListItem>
               ))}
             </List>
@@ -95,15 +111,7 @@ class SimpleList extends React.Component {
     } else {
         return (
           <div style={{
-              backgroundColor: "#fff",
-              height: "100%",
-              width: "100vw",
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "left",
-              justifyContent: "space-evenly",
-              margin: "auto",
-              flexWrap: "wrap"
+            marginLeft: "13%"
           }}>
             <List>
               {value_array.map(value => (
@@ -114,7 +122,8 @@ class SimpleList extends React.Component {
                   button
                   onClick={this.handleToggle(key_array[value_array.indexOf(value)], value)}
                 >
-                <ListItemText primary={`${value.interaction.description}`} secondary = {`${value.interaction.creationTimestamp} | ${value.interaction.locationStr} | ${value.guest.name}`} />
+                <ListItemText primary={`${value.interaction.description}`}
+                              secondary = {`${value.interaction.creationTimestamp} | ${value.interaction.locationStr} | ${value.guest.name} | ${value.resources}`} />
 
                 </ListItem>
               ))}
