@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -18,6 +19,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Paper from "@material-ui/core/Paper";
+import { Link } from "react-router-dom";
+
 
 const styles = theme => ({
   root: {
@@ -33,14 +36,30 @@ const styles = theme => ({
 });
 
 class DashboardPage extends React.Component {
-  state = {
-    spacing: "40"
-  };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        spacing: "40",
+        user: false
+      };
+    }
+
+  componentWillMount() {
+      let self = this;
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            self.setState({user: true});
+          } else {
+              self.setState({user: false});
+          }
+      });
+  }
 
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
-    var user = firebase.auth().currentUser;
+    var user = this.state.user;
     if (user) {
       return (
         <div
@@ -175,12 +194,17 @@ class DashboardPage extends React.Component {
         </div>
       );
     } else {
-		alert(
-			"Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
-		  );
-		  
-		return <Redirect to='/'  />
+        return (
+            <div>
+                <p>Sorry, you don't have access to this site. Please contact an admin if you have any questions.</p>
+                <Link to="/">Return to homepage</Link>
+            </div>
+        );
     }
+  }
+  componentWillUnmount() {
+      if (this.statePromises)
+          this.statePromises.forEach(p => p.cancel());
   }
 }
 

@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import * as firebase from "firebase";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Nav } from "./navbar/Nav";
+import { Link } from "react-router-dom";
+
 
 import { CreateAdminAccountCard } from "./cards/CreateAdminAccountCard";
 
@@ -11,10 +14,24 @@ class AdminPage extends Component {
   constructor(props) {
     super(props);
     let self = this;
+    this.state = {
+      user: false
+    };
+  }
+
+  componentWillMount() {
+      let self = this;
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            self.setState({user: true});
+          } else {
+              self.setState({user: false});
+          }
+      });
   }
 
   render(history) {
-    var user = firebase.auth().currentUser;
+      var user = this.state.user;
     if (user) {
       return (
         <div
@@ -67,12 +84,17 @@ class AdminPage extends Component {
         </div>
       );
     } else {
-      alert(
-        "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
-      );
-      return <Redirect to='/'  />
-
+        return (
+            <div>
+                <p>Sorry, you don't have access to this site. Please contact an admin if you have any questions.</p>
+                <Link to="/">Return to homepage</Link>
+            </div>
+        );
     }
+  }
+  componentWillUnmount() {
+      if (this.statePromises)
+          this.statePromises.forEach(p => p.cancel());
   }
 }
 
