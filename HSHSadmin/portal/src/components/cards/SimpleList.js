@@ -111,7 +111,7 @@ class SimpleList extends React.Component {
     } else {
         return (
           <div style={{
-            marginLeft: "13%"
+            marginLeft: "20%"
           }}>
             <List>
               {value_array.map(value => (
