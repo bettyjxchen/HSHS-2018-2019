@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import * as firebase from "firebase";
@@ -6,25 +7,31 @@ import ListCard from "./cards/ListCard";
 import { Nav } from "./navbar/Nav";
 import Button from "@material-ui/core/Button";
 import SimpleList from "./cards/SimpleList";
+import { Link } from "react-router-dom";
 
 class InteractionsPage extends Component {
   constructor(props) {
     super(props);
     let self = this;
+    this.state = {
+      user: false
+    };
+  }
+
+  componentWillMount() {
+      let self = this;
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            self.setState({user: true});
+          } else {
+              self.setState({user: false});
+          }
+      });
   }
 
   render() {
-    /*return (
-            <div >
-              <ListCard
-                  label = "Interactions"
-                  dataRef = {firebase.database().ref("/interactions")}
-                  hasTitle = {false}
-                  style = {{flex: 1, margin: 10}}/>
-            </div>
-		);*/
 
-    var user = firebase.auth().currentUser;
+    var user = this.state.user;
     if (user) {
       return (
         <div
@@ -44,10 +51,12 @@ class InteractionsPage extends Component {
         </div>
       );
     } else {
-      alert(
-        "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
-      );
-      return <Redirect to='/'  />
+        return (
+            <div>
+                <p>Sorry, you don't have access to this site. Please contact an admin if you have any questions.</p>
+                <Link to="/">Return to homepage</Link>
+            </div>
+        );
 
     }
   }
