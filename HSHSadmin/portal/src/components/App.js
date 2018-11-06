@@ -10,6 +10,7 @@ import VolunteersPage from "./Volunteers";
 import GuestsPage from "./Guests";
 import AdminPage from "./Admin";
 import ReportsPage from "./Reports";
+import SupplyPage from "./Supply"
 import * as firebase from "firebase";
 import InteractionsPage from "./Interactions";
 
@@ -24,6 +25,7 @@ class App extends React.Component {
         			<Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
         			<Route exact path={routes.LOGOUT} component={() => <SignInPage />} />
         			<Route exact path={routes.PANEL} component={() => <PanelPage />} />
+					<Route exact path={routes.SUPPLY} component={() => <SupplyPage />} />
         			<Route
         				exact
         				path={routes.DASHBOARD}
