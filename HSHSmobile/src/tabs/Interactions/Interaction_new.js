@@ -20,7 +20,7 @@ import TagGuestPopup from "../../modules/popups/TagGuestPopup"
 import renderLoader from "../../modules/UI/renderLoader";
 import renderSeperator from '../../modules/UI/renderSeperator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {addInteractionItem, getActionItems} from "../../redux/actions";
+import {addInteractionItem, getActionItems, addUsage} from "../../redux/actions";
 import DatePicker from 'react-native-datepicker';
 import Moment from 'moment';
 import Counter from '../../modules/Counter';
@@ -40,7 +40,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispath, ownProps) {
     return {
         addInteractionItem: addInteractionItem,
-        getActionItems: getActionItems
+        getActionItems: getActionItems,
+        addUsage: addUsage,
     };
 }
 
@@ -102,6 +103,7 @@ class Interaction_new extends Component {
     }
 
     componentDidMount() {
+        addUsage();
         this.props.navigator.setButtons({
             rightButtons: [
                 {

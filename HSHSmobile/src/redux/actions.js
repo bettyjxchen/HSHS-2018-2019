@@ -328,3 +328,25 @@ export const getLotteryWinners = () => {
 
         });
 }
+
+// input is an object
+export const addUsage = (input, date) => {
+    firebase.database().ref('dateEntry').child(this.today).once('value', snapshot => {
+        let dailyReport = snapshot.val();
+
+        for (let supply in input.Supply) {
+            dailyReport.Supply[supply] = dailyReport.Supply[supply] ? dailyReport[supply] : 0;
+            dailyReport.Supply[supply] += input.Supply[supply];
+        }
+
+        for (let data in input.Headcount) {
+            dailyReport.Headcount[data] += input.Headcount[data];
+        }
+
+        firebase.database().ref('dateEntry').update({
+            [date]: dailyReport,
+        });
+    })
+}
+
+
