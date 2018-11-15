@@ -91,4 +91,3 @@ Nav.propTypes = {
 };
 
 export default withStyles(styles)(Nav);
-export { Nav };

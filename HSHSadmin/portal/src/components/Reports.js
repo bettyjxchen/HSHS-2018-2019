@@ -1,63 +1,97 @@
 /* eslint-disable */
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
-import * as firebase from "firebase";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Nav } from "./navbar/Nav";
+import * as firebase from "firebase";
+import * as routes from "../constants/routes";
+import Nav from "./navbar/Nav";
+import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+import ReportsTable from "./reports/ReportsTable";
 
-class ReportsPage extends Component {
-  constructor(props) {
-    super(props);
-    let self = this;
-  }
+const styles = theme => ({
+	root: {
+		flexGrow: 1
+	},
+	paper: {
+		height: 250,
+		width: 100
+	},
+	control: {
+		padding: theme.spacing.unit * 2
+	}
+});
 
-  render() {
-    var user = firebase.auth().currentUser;
-    if (user) {
-      return (
-        <div
-          style={{
-            backgroundColor: "#dce0e2",
-            height: "100%",
-            width: "100%",
-            flexDirection: "row",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            margin: "auto",
-            flexWrap: "wrap"
-          }}
-        >
-          <div>
-            <Nav />
-            <main>
-              <h1>THIS IS REPORTS PAGE</h1>
-              <Button
-                color={"secondary"}
-                size={"large"}
-                full-width={"true"}
-                href={"/dashboard"}
-                variant={"outlined"}
-              >
-                Back to Dashboard
-              </Button>
-            </main>
-          </div>
-        </div>
-      );
-    } else {
-      alert(
-        "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
-      );
-      return <Redirect to='/'  />
+class ReportsPage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			spacing: "40",
+			user: false
+		};
+	}
 
-    }
-  }
+	componentWillMount() {
+		let self = this;
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				self.setState({ user: true });
+			} else {
+				self.setState({ user: false });
+			}
+		});
+	}
 
-  // componentWillUnmount() {
-  // 	if (this.statePromises) this.statePromises.forEach(p => p.cancel());
-  // }
+	render() {
+		const { classes } = this.props;
+		const { spacing } = this.state;
+		var user = this.state.user;
+		if (user) {
+			return (
+				<div
+					style={{
+						height: "100%",
+						width: "100%",
+						backgroundColor: "#dce0e2"
+					}}
+				>
+					<Nav />
+					<div
+						style={{
+							marginLeft: "218px",
+							marginTop: "54px"
+						}}
+					>
+						<Grid
+							container
+							className={classes.root}
+							spacing={16}
+							style={{
+								width: "100%"
+							}}
+						>
+							<Grid item xs={12}>
+								<ReportsTable />
+							</Grid>
+						</Grid>
+					</div>
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<p>
+						Sorry, you don't have access to this site. Please contact an admin
+						if you have any questions.
+					</p>
+					<Link to="/">Return to homepage</Link>
+				</div>
+			);
+		}
+	}
+	componentWillUnmount() {
+		if (this.statePromises) this.statePromises.forEach(p => p.cancel());
+	}
 }
 
-export default withRouter(ReportsPage);
+export default withStyles(styles)(ReportsPage);
