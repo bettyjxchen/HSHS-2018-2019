@@ -1,0 +1,221 @@
+/*dashboard page*/
+/*text info for volunteer/admin/guest in dashboard*/
+.dashboard-h1 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 36px;
+    line-height: 42px;
+    align: left;
+    color: #737171;
+}
+
+/*text info for monthly report in dashboard*/
+.dashboard-h2 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 30px;
+    line-height: 35px;
+    align: center;
+    color: #737171;
+}
+
+/*text info for monthly report in dashboard*/
+.dashboard-h3 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 115px;
+
+    line-height: 135px;
+    align: center;
+    color: #737171;
+}
+
+/*text info for volunteer/guest report in dashboard (under monthly report)*/
+.dashboard-h4 {
+    font-family: Roboto;
+    font-style: light;
+    font-size: 36px;
+    line-height: 42px;
+    align: center;
+    color: #464444;
+}
+
+/*text info for volunteer/guest report in dashboard (under monthly report)*/
+.dashboard-h5 {
+    font-family: Roboto;
+    font-style: medium;
+    font-size: 24px;
+    line-height: 28px;
+    align: left;
+    color: #FFFDFD;
+}
+
+/*text info for paragraphs in dashboard*/
+.dashboard-h6 {
+    font-family: Roboto;
+    font-style: thin;
+    font-size: 24px;
+    line-height: 28px;
+    align: center;
+    color: #000000;
+}
+
+/*interactions page*/
+h2.title {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 85px;
+    line-height: 100px;
+    align: left;
+    color: #737171;
+}
+
+h2.guest-label {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 30px;
+    line-height: 35px;
+    align: left;
+    color: #000000;
+}
+
+h2.description {
+    font-family: Roboto;
+    font-style: light;
+    font-size: 30px;
+    line-height: 35px;
+    align: left;
+    color: #000000;
+}
+
+h2.volunteer-name {
+    font-family: Roboto;
+    font-style: light;
+    font-size: 24px;
+    line-height: 28px;
+    align: left;
+    color: #000000;
+}
+
+/*login page*/
+/*main title "harvard square"*/
+h1.login-title {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 96px;
+    line-height: 113px;
+    align: left;
+    color: #FFFBFB;
+    stroke: solid;
+}
+
+/*main title "homeless shelter"*/
+h2 {
+    font-family: Roboto;
+    font-style: light;
+    font-size: 72px;
+    line-height: 84px;
+    align: left;
+    color: #FFFFFF;
+}
+
+
+/*email add/pw*/
+h3 {
+    font-family: Montserrat;
+    font-style: Regular;
+    font-size: 18px;
+    line-height: 22px;
+    align: left;
+    color: #000000;
+}
+
+/*forgot acc and don't have an acc*/
+h4 {
+    font-family: Montserrat;
+    font-style: Regular;
+    font-size: 18px;
+    line-height: 22px;
+    align: right;
+    color: #FFFFFF;
+}
+
+/*log in*/
+h5 {
+    font-family: Montserrat;
+    font-style: Regular;
+    font-size: 24px;
+    line-height: 24px;
+    align: left;
+    color: #FFFCFC;
+}
+
+/*harvard square text in side bar*/
+h6 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 17px;
+    line-height: 20px;
+    align: left;
+    color: #CE0909;
+}
+
+/*side bar info*/
+p {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 18px;
+    line-height: 21px;
+    align: left;
+    color: #FFFFFF;
+}
+
+/*volunteer title*/
+h1 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 85px;
+    line-height: 100px;
+    align: left;
+    color: #737171;
+}
+
+/*add volunteer button*/
+h2 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 30px;
+    line-height: 35px;
+    align: left;
+    color: #FFFFFF;
+}
+
+/*search bar*/
+h2 {
+    font-family: Roboto;
+    font-style: Medium;
+    font-size: 24px;
+    line-height: 28px;
+    align: left;
+    color: #B9B4B4;
+}
+
+/*main header*/
+h3 {
+    font-family: Roboto;
+    font-style: Bold;
+    font-size: 36px;
+    line-height: 42px;
+    align: left;
+    color: #5E5E5E;
+}
+
+/*info*/
+h4 {
+    font-family: Roboto;
+    font-style: light;
+    font-size: 30px;
+    line-height: 35px;
+    align: left;
+    color: #5E5E5E;
+}
