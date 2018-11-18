@@ -44,6 +44,13 @@ class SupplyPage extends React.Component {
     }
   };
 
+  checkAllBoxes = label => {
+    if (this.checkedItems.has(label)) {
+    } else {
+      this.checkedItems.add(label);
+    }
+  };
+
   createCheckbox = label => (
     <Checkbox
       label={label}
@@ -59,8 +66,23 @@ class SupplyPage extends React.Component {
   checkEntryExist = date => {
     dateEntry.child(date).once("value", snapshot => {
       if (snapshot.val() !== null) {
-        alert("You have already generated the supplies");
-        // TODO: add modification code;
+        for (var item in snapshot.val().Supply) {
+          if (regularItems.includes(item)) {
+            this.checkedItems.add(item);
+          } else {
+            console.log("item is" + item);
+            this.checkedItems.add(item);
+            this.addedItems.push(item);
+          }
+        }
+        console.log(this.checkedItems);
+
+        for (var i in this.checkedItems) {
+          //this.toggleCheckbox(i);
+          i.checked = true;
+        }
+
+        this.forceUpdate();
       } else {
         console.log("New Supply");
       }
