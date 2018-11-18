@@ -51,13 +51,13 @@ export default class Counter extends Component {
 		return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.incrementCount}>
-            <Icon name="chevron-up" size={30} color="gray" />
+            <Icon name="chevron-up" size={50} color="gray" />
         </TouchableOpacity>
         <View style={styles.circle}>
-            <Text style={styles.text}>{this.state.count.toString()}</Text>
+            <Text style={styles.counter}>{this.state.count.toString()}</Text>
         </View>
         <TouchableOpacity onPress={this.decrementCount}>
-            <Icon name="chevron-down" size={30} color="gray" />
+            <Icon name="chevron-down" size={50} color="gray" />
         </TouchableOpacity>
         <Text style={styles.text}>{this.props.itemName}</Text>
       </View>
@@ -85,6 +85,9 @@ const styles = StyleSheet.create({
       backgroundColor: 'white'
     },
     text: {
-      fontSize: 12,
+      fontSize: 15,
+    },
+    counter: {
+      fontSize: 30,
     }
 });

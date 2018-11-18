@@ -15,7 +15,7 @@ class App {
 
     startApp() {
         // this will start our app
-
+        console.log(Navigation);
         Navigation.registerComponent('Login', () => Login, store, Provider);
         Navigation.registerComponent('Signup', () => Signup);
 

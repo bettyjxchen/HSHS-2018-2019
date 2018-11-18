@@ -302,6 +302,15 @@ export const getLotteryWinnersSuccess = (data) => ({
     payload: data
 })
 
+export const getSupplyStart = () => ({
+    type: 'GET_SUPPLY_START'
+})
+
+export const getSupplySuccess = (data) => ({
+    type: 'GET_SUPPLY_SUCCESS',
+    payload: data
+})
+
 export const resetWinners = () => {
     let ref = firebase.database().ref('/');
     ref.update({lottery: null});
@@ -330,23 +339,92 @@ export const getLotteryWinners = () => {
 }
 
 // input is an object
-export const addUsage = (input, date) => {
-    firebase.database().ref('dateEntry').child(this.today).once('value', snapshot => {
+// {Supply: {
+//     Apple: 1
+// }, Headcount: {
+
+// }}
+
+export const addUsage = (input) => {
+    let date = generateDate();
+
+    console.log(input);
+    
+    firebase.database().ref('dateEntry').child(date).once('value', snapshot => {
         let dailyReport = snapshot.val();
+        console.log(dailyReport);
 
         for (let supply in input.Supply) {
-            dailyReport.Supply[supply] = dailyReport.Supply[supply] ? dailyReport[supply] : 0;
-            dailyReport.Supply[supply] += input.Supply[supply];
+            let tempSupplyCount = dailyReport.Supply[supply];
+
+            if (tempSupplyCount) {
+                tempSupplyCount = tempSupplyCount + input.Supply[supply];
+                dailyReport.Supply[supply] = tempSupplyCount;
+            } 
+            else {
+                dailyReport.Supply[supply] = input.Supply[supply];
+            }
         }
 
         for (let data in input.Headcount) {
-            dailyReport.Headcount[data] += input.Headcount[data];
+            let tempHeadCount = dailyReport.Headcount[data];
+
+            if (tempHeadCount) {
+                tempHeadCount = tempHeadCount + input.Headcount[data];
+                dailyReport.Headcount[data] = tempHeadCount;
+            } 
+            else {
+                dailyReport.Headcount[data] = input.Headcount[data];
+            }
         }
+
+        console.log(dailyReport)
 
         firebase.database().ref('dateEntry').update({
             [date]: dailyReport,
         });
     })
 }
+
+export const getSupply = () => {
+    store.dispatch(getSupplyStart());
+    let date = generateDate();
+
+    firebase.database().ref('dateEntry').child(date).once('value', (snapshot) => {
+        let dailyReport = snapshot.val();
+
+        if (dailyReport) {
+            let supplyArr = [];
+
+            for (let supply in dailyReport.Supply) {
+                supplyArr.push(supply);
+            }
+
+            store.dispatch(getSupplySuccess(supplyArr));
+        } else {
+            store.dispatch(null);
+        }
+    })
+}
+
+function generateDate() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+  
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+  
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+  
+    today = mm + "-" + dd + "-" + yyyy;
+  
+    return today;
+  }
+
 
 

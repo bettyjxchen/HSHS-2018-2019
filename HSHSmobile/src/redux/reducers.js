@@ -110,7 +110,21 @@ export function reducer(state, action) {
               lotteryWinner: action.payload,
             });
 
+        case 'GET_SUPPLY_START':
+            return Object.assign({}, state, {
+                loading: true
+            });
+
+        case 'GET_SUPPLY_SUCCESS':
+            console.log(action.payload)
+            return Object.assign({}, state, {
+              loading: false,
+              loaded: true,
+              supplies: action.payload,
+            });
+
         default:
+            console.log(action.type);
             return state;
     }
 }

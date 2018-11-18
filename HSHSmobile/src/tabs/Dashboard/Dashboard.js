@@ -17,7 +17,7 @@ import {List, ListItem, SearchBar} from "react-native-elements";
 import firebase from "firebase";
 import {connect} from 'react-redux';
 import MapView from 'react-native-maps';
-import {getGuests, getInteractions, getActionItems, getCompletedActionItems} from '../../redux/actions.js';
+import {getGuests, getInteractions, getActionItems, getCompletedActionItems, getSupply} from '../../redux/actions.js';
 import ActionItemList_module from '../../modules/ActionItemList_module';
 import Lottery_module from '../../modules/Lottery_module';
 import {Icon} from 'react-native-elements';
@@ -39,6 +39,7 @@ function mapStateToProps(state, ownProps) {
         loading: state.loading,
         interactions: state.interactions,
         lotteryWinner: state.lotteryWinner,
+        supplies: state.supplies
     };
 }
 
@@ -48,6 +49,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         getInteractions: getInteractions,
         getActionItems: getActionItems,
         getCompletedActionItems: getCompletedActionItems,
+        getSupply: getSupply,
     };
 }
 
@@ -127,6 +129,7 @@ class Dashboard extends Component {
         this.props.getGuests();
         this.props.getActionItems();
         this.props.getCompletedActionItems();
+        this.props.getSupply();
     };
 
     componentWillUpdate(nextProps, nextState) {
