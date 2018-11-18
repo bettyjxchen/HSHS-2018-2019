@@ -54,10 +54,12 @@ const rows = [
 
 //sorting
 function desc(a, b, orderBy) {
-	if (b[orderBy] < a[orderBy]) {
+    var d1 = Date.parse(a[orderBy]);
+    var d2 = Date.parse(b[orderBy]);
+	if (d1 < d2) {
 		return -1;
 	}
-	if (b[orderBy] > a[orderBy]) {
+	if (d2 > d1) {
 		return 1;
 	}
 	return 0;
@@ -81,7 +83,7 @@ function getSorting(order, orderBy) {
 
 class EnhancedTableHead extends React.Component {
 
-	createSortHandler = property => event => {
+	createSortHandler = property => event => {        
 		this.props.onRequestSort(event, property);
 	};
 
