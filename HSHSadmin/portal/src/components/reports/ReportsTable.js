@@ -17,6 +17,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
+import * as firebase from 'firebase';
+
 
 //create data
 let counter = 0;
@@ -78,6 +80,7 @@ function getSorting(order, orderBy) {
 }
 
 class EnhancedTableHead extends React.Component {
+
 	createSortHandler = property => event => {
 		this.props.onRequestSort(event, property);
 	};
@@ -224,31 +227,28 @@ const styles = theme => ({
 });
 
 class ReportsTable extends React.Component {
-	state = {
-		order: "asc",
-		orderBy: "date",
-		selected: [],
-		data: [
-			createData("11-06-2018", 6, [
-				{ id: 1, item: "apple", count: 0 },
-				{ id: 2, item: "banana", count: 1 }
-			]),
-			createData("11-07-2018", 10, [
-				{ id: 3, item: "apple", count: 0 },
-				{ id: 4, item: "banana", count: 1 }
-			]),
-			createData("11-12-2018", 23, [
-				{ id: 5, item: "apple", count: 0 },
-				{ id: 6, item: "banana", count: 1 }
-			]),
-			createData("11-14-2018", 4, [
-				{ id: 7, item: "apple", count: 0 },
-				{ id: 8, item: "banana", count: 1 }
-			])
-		],
-		page: 0,
-		rowsPerPage: 5
-	};
+    constructor(props) {
+      super(props);
+      this.state = { data: [], order: 'asc', orderBy: 'date', selected: [], page: 0, rowsPerPage: 5 };
+    }
+
+    componentDidMount() {
+        let self = this;
+        firebase.database().ref("/dateEntry/").once('value').then(function(snapshot) {
+            var val = snapshot.val();
+            var reports_list = [];
+            Object.keys(val).forEach((key) => {
+                var value = val[key];
+                if (!value.Supply)
+                    value.Supply = {};
+                var value = { id: key, value: val[key]};
+                reports_list.push(value);
+            });
+            self.setState({
+                data: reports_list
+            });
+        });
+    }
 
 	handleRequestSort = (event, property) => {
 		const orderBy = property;
@@ -320,9 +320,7 @@ class ReportsTable extends React.Component {
 							rowCount={data.length}
 						/>
 						<TableBody>
-							{stableSort(data, getSorting(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map(n => {
+							{this.state.data.map(n => {
 									const isSelected = this.isSelected(n.id);
 									return (
 										<TableRow
@@ -338,17 +336,21 @@ class ReportsTable extends React.Component {
 												<Checkbox checked={isSelected} />
 											</TableCell>
 											<TableCell component="th" scope="row" padding="default">
-												{n.date}
+												{n.id}
 											</TableCell>
 											<TableCell padding="default">
 												<ul style={{ paddingLeft: "15px" }}>
-													{n.supplies.items.map(supply => (
-														<li key={n.supplies.id}>{supply.item}</li>
-													))}
+													{Object.keys(n.value.Supply).map(item => {
+                                                        return <li key={n.id + item}>{item}: {n.value.Supply[item]}</li>
+                                                    })}
 												</ul>
 											</TableCell>
 											<TableCell style={{ paddingLeft: "45px" }}>
-												{n.headcount}
+                                                <ul style={{ paddingLeft: "15px" }}>
+													{Object.keys(n.value.Headcount).map(item => {
+                                                        return <li key={n.id + item}>{item}: {n.value.Headcount[item]}</li>
+                                                    })}
+												</ul>
 											</TableCell>
 										</TableRow>
 									);
