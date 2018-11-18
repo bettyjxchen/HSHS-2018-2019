@@ -54,6 +54,7 @@ const rows = [
 
 //sorting
 function desc(a, b, orderBy) {
+    //TODO @Phil this is the function I changed but I don't see it getting called anywhere
     var d1 = Date.parse(a[orderBy]);
     var d2 = Date.parse(b[orderBy]);
 	if (d1 < d2) {
@@ -83,7 +84,7 @@ function getSorting(order, orderBy) {
 
 class EnhancedTableHead extends React.Component {
 
-	createSortHandler = property => event => {        
+	createSortHandler = property => event => {
 		this.props.onRequestSort(event, property);
 	};
 
