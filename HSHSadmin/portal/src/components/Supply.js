@@ -52,10 +52,18 @@ class SupplyPage extends React.Component {
   };
 
   createCheckbox = label => (
-    <Checkbox
-      label={label}
-      handleCheckboxChange={this.toggleCheckbox}
+    // <Checkbox
+    //   label={label}
+    //   checked
+    //   handleCheckboxChange={this.toggleCheckbox}
+    //   key={label}
+    // />
+    <input
+      type="checkbox"
+      name={label}
       key={label}
+      handleCheckboxChange={this.toggleCheckbox}
+      checked
     />
   );
 
@@ -76,11 +84,7 @@ class SupplyPage extends React.Component {
           }
         }
         console.log(this.checkedItems);
-
-        for (var i in this.checkedItems) {
-          //this.toggleCheckbox(i);
-          i.checked = true;
-        }
+        this.checkedItems.forEach(this.checkAllBoxes);
 
         this.forceUpdate();
       } else {
@@ -112,6 +116,7 @@ class SupplyPage extends React.Component {
 
   handleAddItem = () => {
     this.addedItems.push(this.state.value);
+    this.checkedItems.add(this.state.value);
     this.forceUpdate();
   };
 
