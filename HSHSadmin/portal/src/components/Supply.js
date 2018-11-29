@@ -27,6 +27,7 @@ class SupplyPage extends React.Component {
     this.today = this.generateDate();
     this.checkedItems = new Set();
     this.checkEntryExist(this.today);
+    this.forceUpdate();
 
     console.log(this.generateDate());
     console.log(firebase.database().ref("/interactions"));
@@ -39,15 +40,10 @@ class SupplyPage extends React.Component {
   toggleCheckbox = label => {
     if (this.checkedItems.has(label)) {
       this.checkedItems.delete(label);
+      this.forceUpdate();
     } else {
       this.checkedItems.add(label);
-    }
-  };
-
-  checkAllBoxes = label => {
-    if (this.checkedItems.has(label)) {
-    } else {
-      this.checkedItems.add(label);
+      this.forceUpdate();
     }
   };
 
@@ -58,18 +54,37 @@ class SupplyPage extends React.Component {
     //   handleCheckboxChange={this.toggleCheckbox}
     //   key={label}
     // />
-    <input
-      type="checkbox"
-      name={label}
-      key={label}
-      handleCheckboxChange={this.toggleCheckbox}
-      checked
-    />
+
+    <div>
+      <input
+        type="checkbox"
+        id={label}
+        name={label}
+        onClick={() => this.toggleCheckbox(label)}
+        defaultChecked
+      />
+      <label htmlFor="supplies">{label}</label>
+    </div>
   );
+
+  //   addCheckboxesToChecked = label => {
+  //     if (label.checked === true && !this.checkedItems.has(label)) {
+  //       this.checkedItems.add(label);
+  //     } else {
+  //       if (label.checked !== true && this.checkedItems.has(label)) {
+  //         this.checkedItems.delete(label);
+  //       } else {
+  //       }
+  //     }
+  //   };
 
   createCheckboxes = () => regularItems.map(this.createCheckbox);
 
   createAddedBoxes = () => this.addedItems.map(this.createCheckbox);
+
+  //   addCheckboxesToChecked = () => regularItems.map(this.addCheckboxToChecked);
+
+  //   addAddedboxesToChecked = () => this.addedItems.map(this.addCheckboxToChecked);
 
   checkEntryExist = date => {
     dateEntry.child(date).once("value", snapshot => {
@@ -78,14 +93,12 @@ class SupplyPage extends React.Component {
           if (regularItems.includes(item)) {
             this.checkedItems.add(item);
           } else {
-            console.log("item is" + item);
+            console.log("item is " + item);
             this.checkedItems.add(item);
             this.addedItems.push(item);
           }
         }
         console.log(this.checkedItems);
-        this.checkedItems.forEach(this.checkAllBoxes);
-
         this.forceUpdate();
       } else {
         console.log("New Supply");
@@ -116,7 +129,7 @@ class SupplyPage extends React.Component {
 
   handleAddItem = () => {
     this.addedItems.push(this.state.value);
-    this.checkedItems.add(this.state.value);
+    //this.checkedItems.add(this.state.value);
     this.forceUpdate();
   };
 
@@ -154,6 +167,8 @@ class SupplyPage extends React.Component {
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               {this.createAddedBoxes()}
+              {/* {this.addCheckboxesToChecked()}
+              {this.addAddedboxesToChecked()} */}
               <label>
                 New Item:
                 <input
