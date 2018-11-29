@@ -50,9 +50,8 @@ class ReportsPage extends React.Component {
 			return (
 				<div
 					style={{
-						height: "100%",
-						width: "100%",
-						backgroundColor: "#dce0e2"
+						backgroundColor: "#dce0e2",
+						width: "100%"
 					}}
 				>
 					<Nav />
