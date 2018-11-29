@@ -10,6 +10,14 @@ import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "./CheckboxComponent";
 import Nav from "./navbar/Nav";
 import Grid from "@material-ui/core/Grid";
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import DoneIcon from '@material-ui/icons/Done';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+
+
 
 const styles = theme => ({
 	root: {
@@ -21,27 +29,30 @@ const styles = theme => ({
 	},
 	control: {
 		padding: theme.spacing.unit * 2
-	}
+	},
+	chip: {
+		margin: theme.spacing.unit,
+	},
 });
 
 const rootRef = firebase.database().ref();
 const dateEntry = rootRef.child("dateEntry");
 var regularItems = [
-	"PB&J",
-	"Tuna Sandwich",
-	"Bottled Waters",
-	"V8",
-	"Juice",
-	"Granola Bars",
-	"Fruit Cups",
-	"Fresh Fruit",
-	"Socks",
-	"Handwarmers",
-	"Gloves",
-	"Blankets",
-	"Warm Clothing",
-	"Toiletry Kits",
-	"Female Hygiene Kits"
+	["PB&J", true],
+	["Tuna Sandwich", true],
+	["Bottled Waters", true],
+	["V8", true],
+	["Juice", true],
+	["Granola Bars", true],
+	["Fruit Cups", true],
+	["Fresh Fruit", true],
+	["Socks", true],
+	["Handwarmers", true],
+	["Gloves", true],
+	["Blankets", true],
+	["Warm Clothing", true],
+	["Toiletry Kits", true],
+	["Female Hygiene Kits", true]
 ];
 
 class SupplyPage extends React.Component {
@@ -49,9 +60,12 @@ class SupplyPage extends React.Component {
 		super(props);
 		this.addedItems = [];
 		this.handleChange = this.handleChange.bind(this);
+		this.chip = [["Loading...", false]]
 		this.state = {
 			spacing: "40"
 		};
+
+
 	}
 
 	componentDidMount() {
@@ -62,82 +76,60 @@ class SupplyPage extends React.Component {
 		this.today = this.generateDate();
 		this.checkedItems = new Set();
 		this.checkEntryExist(this.today);
-		this.forceUpdate();
-
-		console.log(this.generateDate());
-		console.log(firebase.database().ref("/interactions"));
 	}
 
 	handleChange(event) {
 		this.setState({ value: event.target.value });
 	}
 
-	toggleCheckbox = label => {
-		if (this.checkedItems.has(label)) {
-			this.checkedItems.delete(label);
-			this.forceUpdate();
-		} else {
-			this.checkedItems.add(label);
-			this.forceUpdate();
+	clearRegular = () => {
+		for (let i = 0; i < regularItems.length; i++) {
+			regularItems[i][1] = false;
 		}
-	};
+	}
 
-	createCheckbox = label => (
-		// <Checkbox
-		//   label={label}
-		//   checked
-		//   handleCheckboxChange={this.toggleCheckbox}
-		//   key={label}
-		// />
+	itemRegularIndex = (item) => {
+		for (let i = 0; i < regularItems.length; i++) {
+			if (regularItems[i][0] === item) {
+				return i;
+			}
+		}
 
-		<div>
-			<input
-				type="checkbox"
-				id={label}
-				name={label}
-				onClick={() => this.toggleCheckbox(label)}
-				defaultChecked
-			/>
-			<label htmlFor="supplies">{label}</label>
-		</div>
-	);
-
-	//   addCheckboxesToChecked = label => {
-	//     if (label.checked === true && !this.checkedItems.has(label)) {
-	//       this.checkedItems.add(label);
-	//     } else {
-	//       if (label.checked !== true && this.checkedItems.has(label)) {
-	//         this.checkedItems.delete(label);
-	//       } else {
-	//       }
-	//     }
-	//   };
-
-	createCheckboxes = () => regularItems.map(this.createCheckbox);
-
-	createAddedBoxes = () => this.addedItems.map(this.createCheckbox);
-
-	//   addCheckboxesToChecked = () => regularItems.map(this.addCheckboxToChecked);
-
-	//   addAddedboxesToChecked = () => this.addedItems.map(this.addCheckboxToChecked);
+		return -1;
+	}
 
 	checkEntryExist = date => {
 		dateEntry.child(date).once("value", snapshot => {
 			if (snapshot.val() !== null) {
-				alert("You have already entered supplies");
-				for (var item in snapshot.val().Supply) {
-					if (regularItems.includes(item)) {
-						this.checkedItems.add(item);
+
+				this.clearRegular();
+				for (let item in snapshot.val().Supply) {
+					this.checkedItems.add(item);
+
+					let index = this.itemRegularIndex(item);
+
+					if (index === -1) { // doesn't exist in the list
+						regularItems.push([item, true]);
 					} else {
-						console.log("item is " + item);
-						this.checkedItems.add(item);
-						this.addedItems.push(item);
+						regularItems[index][1] = true;
 					}
 				}
-				console.log(this.checkedItems);
+
+				alert("You have already entered supplies");
+
+				this.chip = regularItems;
 				this.forceUpdate();
 			} else {
+				this.chip = regularItems;
+
+				for (let item of regularItems) {
+					this.checkedItems.add(item[0]);
+				}
+
 				alert("New Supply");
+
+				this.forceUpdate();
+
 			}
 		});
 	};
@@ -163,10 +155,23 @@ class SupplyPage extends React.Component {
 		return today;
 	};
 
-	handleAddItem = () => {
-		this.addedItems.push(this.state.value);
-		//this.checkedItems.add(this.state.value);
+	handleChipClick = (item) => {
+		let index = regularItems.indexOf(item);
+		regularItems[index][1] = !regularItems[index][1];
+
+		if (this.checkedItems.has(item[0])) {
+			this.checkedItems.delete(item[0]);
+		} else {
+			this.checkedItems.add(item[0]);
+		}
+
 		this.forceUpdate();
+	}
+
+	handleChange = name => event => {
+		this.setState({
+			[name]: event.target.value,
+		});
 	};
 
 	handleSubmit = () => {
@@ -175,9 +180,10 @@ class SupplyPage extends React.Component {
 		for (const checkbox of this.checkedItems) {
 			tempObject[checkbox] = 0;
 		}
+		let date = this.generateDate();
 
 		dateEntry.update({
-			[this.today]: {
+			[date]: {
 				Supply: tempObject,
 				Headcount: {
 					totalPeople: 0,
@@ -189,15 +195,37 @@ class SupplyPage extends React.Component {
 		});
 
 		alert("Data entry saved successfully! Have a great shift");
-	};
+	}
 
-	handleFormSubmit = formSubmitEvent => {
-		formSubmitEvent.preventDefault();
-	};
+	handleAddItem = () => {
+		if (!this.state.itemName) {
+			alert("Input field is empty");
+			return;
+		} else {
+			if (this.itemRegularIndex(this.state.itemName) === -1) {
+				regularItems.push([this.state.itemName, true]);
+				this.checkedItems.add(this.state.itemName);
+				this.forceUpdate();
+			} else {
+				alert('This item already exist');
+			}
+		}
+	}
 
 	render() {
-		// const { classes } = this.props;
 		const { spacing } = this.state;
+		var listChips = this.chip.map((item) => {
+			return <span style={{ margin: "10px", display: "block" }}>
+				<Chip
+					avatar={<Avatar>ST</Avatar>}
+					label={item[0] + (item[1] ? "     ✅" : "     ❌")}
+					clickable
+					onClick={() => this.handleChipClick(item)}
+					color={item[1] ? "primary" : "default"}
+					deleteIcon={<DoneIcon />}
+				/>
+			</span>
+		})
 
 		return (
 			<div
@@ -226,41 +254,37 @@ class SupplyPage extends React.Component {
 									padding: 30
 								}}
 							>
-								<form onSubmit={this.handleFormSubmit}>
-									{this.createCheckboxes()}
-									{this.createAddedBoxes()}
-									{/* {this.addCheckboxesToChecked()}
-                {this.addAddedboxesToChecked()} */}
-									<label style={{ padding: 10 }}>
-										New Item:
-										<input
-											type="text"
-											name="newItem"
-											id="inputField"
-											onChange={this.handleChange}
-										/>
-									</label>
-									<button
-										className="btn btn-default"
-										type="add"
-										onClick={() => {
-											this.handleAddItem();
-											document.getElementById("inputField").value = "";
-										}}
-									>
-										Add Supply
-									</button>
+								{listChips}
+							</div>
 
-									<div>
-										<button
-											className="btn btn-default"
-											type="submit"
-											onClick={() => this.handleSubmit()}
-										>
-											Save
-										</button>
-									</div>
-								</form>
+							<div style={{marginLeft: "50px", marginBottom: "20px"}}>
+								<TextField
+									id="outlined-name"
+									label="Add Item"
+									value={this.state.itemName}
+									onChange={this.handleChange('itemName')}
+									margin="normal"
+									variant="outlined"
+								/>
+							</div>
+							<div>
+								<span style={{margin: "40px"}}><Button
+									variant="contained"
+									color="primary"
+									disableRipple
+									onClick={() => this.handleAddItem()}
+								>
+									Add
+     							</Button>
+								 </span>
+								 <span style={{margin: "40px"}}><Button
+									variant="contained"
+									color="primary"
+									disableRipple
+									onClick={() => this.handleSubmit()}
+								>
+									Submit
+     							</Button></span>
 							</div>
 						</Grid>
 					</Grid>
@@ -269,5 +293,6 @@ class SupplyPage extends React.Component {
 		);
 	}
 }
+
 
 export default withRouter(SupplyPage);
