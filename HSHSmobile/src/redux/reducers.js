@@ -116,7 +116,6 @@ export function reducer(state, action) {
             });
 
         case 'GET_SUPPLY_SUCCESS':
-            console.log(action.payload)
             return Object.assign({}, state, {
               loading: false,
               loaded: true,
@@ -124,7 +123,6 @@ export function reducer(state, action) {
             });
 
         default:
-            console.log(action.type);
             return state;
     }
 }

@@ -347,12 +347,9 @@ export const getLotteryWinners = () => {
 
 export const addUsage = (input) => {
     let date = generateDate();
-
-    console.log(input);
     
     firebase.database().ref('dateEntry').child(date).once('value', snapshot => {
         let dailyReport = snapshot.val();
-        console.log(dailyReport);
 
         for (let supply in input.Supply) {
             let tempSupplyCount = dailyReport.Supply[supply];
@@ -378,8 +375,6 @@ export const addUsage = (input) => {
             }
         }
 
-        console.log(dailyReport)
-
         firebase.database().ref('dateEntry').update({
             [date]: dailyReport,
         });
@@ -402,7 +397,7 @@ export const getSupply = () => {
 
             store.dispatch(getSupplySuccess(supplyArr));
         } else {
-            store.dispatch(null);
+            store.dispatch(getSupplySuccess(null));
         }
     })
 }
