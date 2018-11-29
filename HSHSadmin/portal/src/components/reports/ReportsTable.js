@@ -54,15 +54,29 @@ const rows = [
 
 //sorting
 function desc(a, b, orderBy) {
-    var d1 = Date.parse(a[orderBy]);
-    var d2 = Date.parse(b[orderBy]);
-	if (d1 < d2) {
+	//TODO @Phil this is the function I changed but I don't see it getting called anywhere
+	let date1 = a.id.split("-");
+	let date2 = b.id.split("-");;
+
+	if (date1[2] < date2[2]) {
 		return -1;
-	}
-	if (d2 > d1) {
+	} 
+	else if (date1[2] > date2[2]) {
 		return 1;
+	} 
+	else {
+		if (date1[1] < date2[1]) {
+			return -1;
+		}
+		else if (date1[1] > date2[1]) {
+			return 1;
+		} 
+		else {
+			return (date1[0] > date2[0]) ? -1 : 1;
+		}
 	}
-	return 0;
+	
+	console.error('Date sorting funciton error');
 }
 
 function stableSort(array, cmp) {
@@ -83,7 +97,7 @@ function getSorting(order, orderBy) {
 
 class EnhancedTableHead extends React.Component {
 
-	createSortHandler = property => event => {        
+	createSortHandler = property => event => {
 		this.props.onRequestSort(event, property);
 	};
 
@@ -152,13 +166,13 @@ const toolbarStyles = theme => ({
 	highlight:
 		theme.palette.type === "light"
 			? {
-					color: theme.palette.secondary.main,
-					backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-			  }
+				color: theme.palette.secondary.main,
+				backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+			}
 			: {
-					color: theme.palette.text.primary,
-					backgroundColor: theme.palette.secondary.dark
-			  },
+				color: theme.palette.text.primary,
+				backgroundColor: theme.palette.secondary.dark
+			},
 	spacer: {
 		flex: "1 1 100%"
 	},
@@ -185,10 +199,10 @@ let EnhancedTableToolbar = props => {
 						{numSelected} selected
 					</Typography>
 				) : (
-					<Typography variant="h6" id="tableTitle">
-						Reports
+						<Typography variant="h6" id="tableTitle">
+							Reports
 					</Typography>
-				)}
+					)}
 			</div>
 			<div className={classes.spacer} />
 			<div className={classes.actions}>
@@ -199,10 +213,10 @@ let EnhancedTableToolbar = props => {
 						</IconButton>
 					</Tooltip>
 				) : (
-					<Tooltip title="Filter list">
-						<IconButton aria-label="Filter list" />
-					</Tooltip>
-				)}
+						<Tooltip title="Filter list">
+							<IconButton aria-label="Filter list" />
+						</Tooltip>
+					)}
 			</div>
 		</Toolbar>
 	);
@@ -229,28 +243,28 @@ const styles = theme => ({
 });
 
 class ReportsTable extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { data: [], order: 'asc', orderBy: 'date', selected: [], page: 0, rowsPerPage: 5 };
-    }
+	constructor(props) {
+		super(props);
+		this.state = { data: [], order: 'asc', orderBy: 'date', selected: [], page: 0, rowsPerPage: 5 };
+	}
 
-    componentDidMount() {
-        let self = this;
-        firebase.database().ref("/dateEntry/").once('value').then(function(snapshot) {
-            var val = snapshot.val();
-            var reports_list = [];
-            Object.keys(val).forEach((key) => {
-                var value = val[key];
-                if (!value.Supply)
-                    value.Supply = {};
-                var value = { id: key, value: val[key]};
-                reports_list.push(value);
-            });
-            self.setState({
-                data: reports_list
-            });
-        });
-    }
+	componentDidMount() {
+		let self = this;
+		firebase.database().ref("/dateEntry/").once('value').then(function (snapshot) {
+			var val = snapshot.val();
+			var reports_list = [];
+			Object.keys(val).forEach((key) => {
+				var value = val[key];
+				if (!value.Supply)
+					value.Supply = {};
+				var value = { id: key, value: val[key] };
+				reports_list.push(value);
+			});
+			self.setState({
+				data: reports_list
+			});
+		});
+	}
 
 	handleRequestSort = (event, property) => {
 		const orderBy = property;
@@ -322,7 +336,9 @@ class ReportsTable extends React.Component {
 							rowCount={data.length}
 						/>
 						<TableBody>
-							{this.state.data.map(n => {
+							{stableSort(data, getSorting(order, orderBy))
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map(n => {
 									const isSelected = this.isSelected(n.id);
 									return (
 										<TableRow
@@ -343,15 +359,15 @@ class ReportsTable extends React.Component {
 											<TableCell padding="default">
 												<ul style={{ paddingLeft: "15px" }}>
 													{Object.keys(n.value.Supply).map(item => {
-                                                        return <li key={n.id + item}>{item}: {n.value.Supply[item]}</li>
-                                                    })}
+														return <li key={n.id + item}>{item}: {n.value.Supply[item]}</li>
+													})}
 												</ul>
 											</TableCell>
 											<TableCell style={{ paddingLeft: "45px" }}>
-                                                <ul style={{ paddingLeft: "15px" }}>
+												<ul style={{ paddingLeft: "15px" }}>
 													{Object.keys(n.value.Headcount).map(item => {
-                                                        return <li key={n.id + item}>{item}: {n.value.Headcount[item]}</li>
-                                                    })}
+														return <li key={n.id + item}>{item}: {n.value.Headcount[item]}</li>
+													})}
 												</ul>
 											</TableCell>
 										</TableRow>
