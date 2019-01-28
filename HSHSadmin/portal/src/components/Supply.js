@@ -150,7 +150,7 @@ class SupplyPage extends React.Component {
 			mm = "0" + mm;
 		}
 
-		today = mm + "-" + dd + "-" + yyyy;
+		today = yyyy + "-" + mm + "-" + dd;
 
 		return today;
 	};

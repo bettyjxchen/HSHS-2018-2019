@@ -122,6 +122,18 @@ export function reducer(state, action) {
               supplies: action.payload,
             });
 
+        case 'GET_SUMMARY_START':
+            return Object.assign({}, state, {
+                loading: true
+            });
+
+        case 'GET_SUMMARY_SUCCESS':
+            return Object.assign({}, state, {
+              loading: false,
+              loaded: true,
+              summaries: action.payload,
+            });
+
         default:
             return state;
     }

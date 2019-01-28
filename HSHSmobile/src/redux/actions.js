@@ -311,6 +311,15 @@ export const getSupplySuccess = (data) => ({
     payload: data
 })
 
+export const getSummaryStart = () => ({
+    type: 'GET_SUMMARY_START'
+})
+
+export const getSummarySuccess = (data) => ({
+    type: 'GET_SUMMARY_SUCCESS',
+    payload: data
+})
+
 export const resetWinners = () => {
     let ref = firebase.database().ref('/');
     ref.update({lottery: null});
@@ -381,6 +390,15 @@ export const addUsage = (input) => {
     })
 }
 
+export const addSummary = (summary) => {
+    let date = generateDate();
+
+    firebase.database().ref('dateEntry').child(date).update({
+        'Summary': summary
+    })
+}
+
+// Need to change it to a dynamic system 
 export const getSupply = () => {
     store.dispatch(getSupplyStart());
     let date = generateDate();
@@ -402,6 +420,22 @@ export const getSupply = () => {
     })
 }
 
+export const getSummary = () => {
+    store.dispatch(getSummaryStart());
+
+    firebase.database().ref('dateEntry').limitToLast(4).once('value', (snapshot) => {
+        let summaries = snapshot.val();
+        let summaryByDate = [];
+
+        for (let date in summaries) {
+            summaryByDate.push([date, summaries[date].Summary])
+        }
+        
+        store.dispatch(getSummarySuccess(summaryByDate));
+    })
+}
+
+
 function generateDate() {
     let today = new Date();
     let dd = today.getDate();
@@ -416,7 +450,7 @@ function generateDate() {
       mm = "0" + mm;
     }
   
-    today = mm + "-" + dd + "-" + yyyy;
+    today = yyyy + "-" + mm + "-" + dd;
   
     return today;
   }
