@@ -6,8 +6,8 @@ Harvard Square Homeless Shelter has a Street Team (ST) that goes out to the stre
 
 ## Current Team Members (Spring 2019)
 ***Project Leads***:  <br />
-Matt Manfre
-Greg Pickart
+Matt Manfre <br/>
+Greg Pickart <br/>
 ***Members:***  <br />
 Min Feng <br />
 Phil Wang <br />
