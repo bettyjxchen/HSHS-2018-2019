@@ -63,11 +63,6 @@ export const navActionItems = (
 		/>
 		{/*<ListItemLink1 to="/guests" primary="Guests" icon={<GroupIcon />} />*/}
 		<ListItemLink1
-			to="interactions"
-			primary="Interactions"
-			icon={<DateIcon />}
-		/>
-		<ListItemLink1
 			to="/supply"
 			primary="Supplies"
 			icon={<DateIcon />}
