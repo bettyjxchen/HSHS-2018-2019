@@ -4,20 +4,31 @@
 ## Project Description
 Harvard Square Homeless Shelter has a Street Team (ST) that goes out to the streets of Cambridge and provide assistance to those in need who cannot make it to the shelter. A comprehensive history of all interactions need to be documented and consolidated. Currently, the ST data and notes system is fairly inefficient. The ST members take binders of resources and notepads out on the streets, and the notes are compiled at the end of the night. The app that we are building will streamline this process, and enable individual ST members to easily record and access information on any guest they have interacted with.
 
-## Current Team Members (Fall 2018 - Spring 2019)
-***Project Lead***:  <br />
-Philip Wang  <br />
+## Current Team Members (Spring 2019)
+***Project Leads***:  <br />
+Matt Manfre
+Greg Pickart
 ***Members:***  <br />
 Min Feng <br />
-Matt Manfre <br />
-Betty Chen  <br />
+Phil Wang <br />
 Belen Farias  <br />
+Henry Li <br />
+Ryan Luu <br />
+Jack Zerilli <br />
+Colton Wolk
+
+## Previous Team Members (Fall 2018)
+***Project Lead***:  <br />
+Phil Wang  <br />
+***Members:***  <br />
+Min Feng <br />
 Greg Pickart <br />
+Matt Manfre <br />
+Belen Farias  <br />
 Henry Li <br />
 Linda Cameron <br />
 Jack Zerilli <br />
 Colton Wolk
-
 
 ## Previous Team Members (Fall 2017 - Spring 2018)
 ***Project Lead***:  <br />
@@ -53,7 +64,9 @@ We chose to use react-native for frontend and firebase for backend
 ## How to run web app:
 1. cd HSHSadmin/portal
 
-2. npm start
+2. npm install
+
+3. npm start
 
 ## Note: the current master is v0
 
