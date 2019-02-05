@@ -222,12 +222,15 @@ class Dashboard extends Component {
     // I'm not sure if this is the best way to have logical statements within renders, but it's not the worst way!
     render() {
         return (
-            <View style={{ flex: 1, alignContent: 'center', alignItems: 'center', justifyContent: "center" }}>
+            <View style={styles.buttonGroup}>
                 <Button
+                    buttonStyle = {styles.buttons}
                     title='Submit Summary'
                     onPress={() => {addSummary(this.state.text); this.Popup.show();}}
                 />
+                <Text>&nbsp;</Text> 
                 <Button
+                    buttonStyle = {styles.buttons}
                     title='View Summary'
                     onPress={() => {this._getSummary(); this.summaryPopup.show()}}
                 />
@@ -263,6 +266,18 @@ class Dashboard extends Component {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    buttonGroup : {
+        flex: 1, 
+        alignContent: 'center', 
+        alignItems: 'center', 
+        justifyContent: "center", 
+        paddingTop: 50, 
+    },
+    buttons : {
+        borderRadius: 15,  
+        backgroundColor: "#E74C3C",
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(dupNavFix(Dashboard));
