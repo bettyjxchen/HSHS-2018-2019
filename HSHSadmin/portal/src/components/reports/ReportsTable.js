@@ -281,13 +281,24 @@ class ReportsTable extends React.Component {
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map(n => {
 									//map data to form fields
-									n.value.Headcount = {
-										"E-beds called in": n.value.Headcount["bedsCalled"],
-										"People spoken to about resources":
-											n.value.Headcount["peopleAboutResource"],
-										"Total people spoken to": n.value.Headcount["totalPeople"],
-										"Youth spoken to": n.value.Headcount["youth"]
-									};
+									if (n.value.Headcount) {
+										n.value.Headcount = {
+											"E-beds called in": n.value.Headcount["bedsCalled"],
+											"People spoken to about resources":
+												n.value.Headcount["peopleAboutResource"],
+											"Total people spoken to": n.value.Headcount["totalPeople"],
+											"Youth spoken to": n.value.Headcount["youth"]
+										};
+									} else {
+										n.value.Headcount = {
+											"E-beds called in": 0,
+											"People spoken to about resources":
+												0,
+											"Total people spoken to": 0,
+											"Youth spoken to": 0
+										};
+									}
+									
 
 									return (
 										<TableRow hover role="checkbox" tabIndex={-1} key={n.id}>
