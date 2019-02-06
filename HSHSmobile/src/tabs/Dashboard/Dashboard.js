@@ -214,8 +214,10 @@ class Dashboard extends Component {
         this.props.getSummary();
         this.summaryText = "";
 
-        for (let entry of this.props.summaries) {
-            this.summaryText += entry[0] + "\n" + entry[1] + "\n\n"
+        if (this.props) {
+            for (let entry of this.props.summaries) {
+                this.summaryText += entry[0] + "\n" + entry[1] + "\n\n"
+            }
         }
     }
 
