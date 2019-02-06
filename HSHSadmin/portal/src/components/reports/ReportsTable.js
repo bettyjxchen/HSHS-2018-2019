@@ -47,7 +47,8 @@ const rows = [
 		numeric: false,
 		disablePadding: false,
 		label: "Headcount"
-	}
+	},
+	{ id: "summary", numeric: false, disablePadding: false, label: "Summary"}
 ];
 
 //sorting
@@ -321,6 +322,9 @@ class ReportsTable extends React.Component {
 														);
 													})}
 												</ul>
+											</TableCell>
+											<TableCell padding="default">
+												{n.value.Summary}
 											</TableCell>
 										</TableRow>
 									);
