@@ -46,7 +46,7 @@ class SignInCard extends Component {
               // Show admin UI.
               console.log("isadmin");
               this.setState(() => ({ ...INITIAL_STATE }));
-              history.push(routes.DASHBOARD);
+              history.push(routes.REPORTS);
               //showAdminUI();
             } else {
               alert(
