@@ -57,19 +57,19 @@ function desc(a, b, orderBy) {
 	let date1 = a.id.split("-");
 	let date2 = b.id.split("-");
 
-	if (date1[2] < date2[2]) {
-		return -1;
-	} else if (date1[2] > date2[2]) {
-		return 1;
-	} else {
-		if (date1[1] < date2[1]) {
-			return -1;
-		} else if (date1[1] > date2[1]) {
-			return 1;
-		} else {
-			return date1[0] > date2[0] ? -1 : 1;
-		}
-	}
+    if (date1[0] < date2[0]) {
+        return -1;
+    } else if (date1[0] > date2[0]) {
+        return 1;
+    } else {
+        if (date1[1] < date2[1]) {
+            return -1;
+        } else if (date1[1] > date2[1]) {
+            return 1;
+        } else {
+            return date1[2] > date2[2] ? 1 : -1;
+        }
+    }
 
 	console.error("Date sorting funciton error");
 }
