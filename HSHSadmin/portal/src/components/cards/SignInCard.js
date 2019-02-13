@@ -44,17 +44,12 @@ class SignInCard extends Component {
             // Confirm the user is an Admin.
             if (!!idTokenResult.claims.admin) {
               // Show admin UI.
-              console.log("isadmin");
               this.setState(() => ({ ...INITIAL_STATE }));
-              history.push(routes.DASHBOARD);
-              //showAdminUI();
+              history.push(routes.REPORTS);
             } else {
               alert(
                 "Sorry, you don't have access to this site. \nPlease contact an admin if you have any questions"
               );
-              // Show regular user UI.
-              console.log("isuser");
-              //showRegularUI();
             }
           })
           .catch(error => {

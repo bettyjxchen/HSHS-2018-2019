@@ -216,8 +216,10 @@ class Dashboard extends Component {
         this.props.getSummary();
         this.summaryText = "";
 
-        for (let entry of this.props.summaries) {
-            this.summaryText += entry[0] + "\n" + entry[1] + "\n\n"
+        if (this.props) {
+            for (let entry of this.props.summaries) {
+                this.summaryText += entry[0] + "\n" + entry[1] + "\n\n"
+            }
         }
     }
 
@@ -248,7 +250,7 @@ class Dashboard extends Component {
                 
                 <Image 
                 source={require('./logo.png')} 
-                style={{width:100,height: 90,position:'absolute',bottom:70}}
+                style={{width:120,height: 90,position:'absolute',bottom:70}}
                 />
                 <Popup
                     title={"Submit Summary"}

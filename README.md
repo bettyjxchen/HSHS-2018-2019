@@ -59,7 +59,13 @@ We chose to use react-native for frontend and firebase for backend
 
 3. npm install
 
-4. react-native run-ios / react-native run-android
+4. open IOS
+
+5. Open up the xcodeproject
+
+6. File -> Project Setting -> Build System -> Legacy Build System
+
+7. Run the application (MUST DO 6 FIRST)
 
 ## How to run web app:
 1. cd HSHSadmin/portal

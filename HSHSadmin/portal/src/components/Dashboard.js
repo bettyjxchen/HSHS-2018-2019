@@ -102,6 +102,33 @@ class DashboardPage extends React.Component {
 									<Grid item style={{ padding: "40px" }}>
 										<div style={{ textAlign: "center" }}>
 											<Button
+												href="/reports"
+												variant="fab"
+												aria-label="Reports"
+												className={styles.button}
+												style={{
+													height: "200px",
+													width: "200px",
+													backgroundColor: "#9e0806",
+													marginTop: "100px"
+												}}
+												color="secondary"
+											>
+												<AdminIcon
+													style={{
+														height: "100px",
+														width: "100px"
+													}}
+												/>
+											</Button>
+											<h1>Reports</h1>
+											<h3 style={{ color: "#474747" }}>View daily street team reports</h3>
+										</div>
+									</Grid>
+
+									<Grid item style={{ padding: "40px" }}>
+										<div style={{ textAlign: "center" }}>
+											<Button
 												href="/volunteers"
 												variant="fab"
 												aria-label="Volunteers"
@@ -123,7 +150,7 @@ class DashboardPage extends React.Component {
 											</Button>
 											<h1>Volunteers</h1>
 											<h3 style={{ color: "#474747" }}>
-												Access volunteer portal
+												Add new volunteer account
 											</h3>
 										</div>
 									</Grid>
@@ -150,41 +177,12 @@ class DashboardPage extends React.Component {
 													}}
 												/>
 											</Button>
-											<h1>Admin</h1>
-											<h3 style={{ color: "#474747" }}>Access admin portal</h3>
+											<h1>Admins</h1>
+											<h3 style={{ color: "#474747" }}>Add new admin account</h3>
 										</div>
 									</Grid>
 
-									<Grid item style={{ padding: "40px" }}>
-										<div style={{ textAlign: "center" }}>
-											<Button
-												href="/guests"
-												variant="fab"
-												aria-label="Add"
-												className={styles.button}
-												style={{
-													height: "200px",
-													width: "200px",
-													backgroundColor: "#9e0806",
-													marginTop: "100px"
-												}}
-												color="secondary"
-											>
-												<GroupIcon
-													style={{
-														height: "100px",
-														width: "100px"
-													}}
-												/>
-											</Button>
-											<div>
-												<h1>Guests</h1>
-												<h3 style={{ color: "#474747" }}>
-													Access guest portal
-												</h3>
-											</div>
-										</div>
-									</Grid>
+									
 								</Grid>
 							</Grid>
 						</Grid>

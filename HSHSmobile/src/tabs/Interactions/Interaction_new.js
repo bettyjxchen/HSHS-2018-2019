@@ -106,9 +106,7 @@ class Interaction_new extends Component {
         }
         if (props.supplies && props.supplies !== 0) {
             this.setState(getInitialState(props.supplies));
-        } else {
-            Alert.alert("You have not yet added supplies");
-        }
+        } 
     }
 
     componentDidMount() {

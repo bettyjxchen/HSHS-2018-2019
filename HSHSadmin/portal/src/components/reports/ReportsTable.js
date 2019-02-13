@@ -57,19 +57,19 @@ function desc(a, b, orderBy) {
 	let date1 = a.id.split("-");
 	let date2 = b.id.split("-");
 
-	if (date1[2] < date2[2]) {
-		return -1;
-	} else if (date1[2] > date2[2]) {
-		return 1;
-	} else {
-		if (date1[1] < date2[1]) {
-			return -1;
-		} else if (date1[1] > date2[1]) {
-			return 1;
-		} else {
-			return date1[0] > date2[0] ? -1 : 1;
-		}
-	}
+    if (date1[0] < date2[0]) {
+        return -1;
+    } else if (date1[0] > date2[0]) {
+        return 1;
+    } else {
+        if (date1[1] < date2[1]) {
+            return -1;
+        } else if (date1[1] > date2[1]) {
+            return 1;
+        } else {
+            return date1[2] > date2[2] ? 1 : -1;
+        }
+    }
 
 	console.error("Date sorting funciton error");
 }
@@ -172,7 +172,7 @@ let EnhancedTableToolbar = props => {
 			<div className={classes.title}>
 				{
 					<Typography variant="h6" id="tableTitle">
-						Reports
+						Daily Street Team Reports
 					</Typography>
 				}
 			</div>
@@ -281,13 +281,24 @@ class ReportsTable extends React.Component {
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map(n => {
 									//map data to form fields
-									n.value.Headcount = {
-										"E-beds called in": n.value.Headcount["bedsCalled"],
-										"People spoken to about resources":
-											n.value.Headcount["peopleAboutResource"],
-										"Total people spoken to": n.value.Headcount["totalPeople"],
-										"Youth spoken to": n.value.Headcount["youth"]
-									};
+									if (n.value.Headcount) {
+										n.value.Headcount = {
+											"E-beds called in": n.value.Headcount["bedsCalled"],
+											"People spoken to about resources":
+												n.value.Headcount["peopleAboutResource"],
+											"Total people spoken to": n.value.Headcount["totalPeople"],
+											"Youth spoken to": n.value.Headcount["youth"]
+										};
+									} else {
+										n.value.Headcount = {
+											"E-beds called in": 0,
+											"People spoken to about resources":
+												0,
+											"Total people spoken to": 0,
+											"Youth spoken to": 0
+										};
+									}
+									
 
 									return (
 										<TableRow hover role="checkbox" tabIndex={-1} key={n.id}>

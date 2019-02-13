@@ -51,11 +51,7 @@ ListItemLink1.propTypes = {
 
 export const navActionItems = (
 	<div>
-		<ListItemLink1
-			to="/dashboard"
-			primary="Dashboard"
-			icon={<DashboardIcon />}
-		/>
+		<ListItemLink1 to="/reports" primary="Reports" icon={<ReportsIcon />} />
 		<ListItemLink1
 			to="/volunteers"
 			primary="Volunteers"
@@ -68,7 +64,6 @@ export const navActionItems = (
 			icon={<DateIcon />}
 		/>
 		<ListItemLink1 to="/admin" primary="Admin" icon={<AdminIcon />} />
-		<ListItemLink1 to="/reports" primary="Reports" icon={<ReportsIcon />} />
 	</div>
 );
 

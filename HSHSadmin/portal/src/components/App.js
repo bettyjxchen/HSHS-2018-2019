@@ -36,13 +36,6 @@ class App extends React.Component {
         				path={routes.VOLUNTEERS}
         				component={() => <VolunteersPage />}
         			/>
-
-        			<Route exact path={routes.GUESTS} component={() => <GuestsPage />} />
-        			<Route
-        				exact
-        				path={routes.INTERACTIONS}
-        				component={() => <InteractionsPage />}
-        			/>
         			<Route exact path={routes.ADMIN} component={() => <AdminPage />} />
         			<Route exact path={routes.REPORTS} component={() => <ReportsPage />} />
 
