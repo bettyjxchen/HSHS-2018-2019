@@ -30,6 +30,11 @@ class CreateAdminAccountCard extends Component {
             key,
         } = this.state;
 
+        if(password.length < 6) {
+            alert("Password must be at least 6 characters long");
+            return;
+        }
+
         let signUp = firebase.functions().httpsCallable("signUp");
         let authKey = firebase.functions().httpsCallable("authAccountKey");
 
