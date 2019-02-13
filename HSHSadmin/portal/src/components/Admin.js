@@ -64,20 +64,6 @@ class AdminPage extends Component {
 						<CreateAdminAccountCard history={history} />
 						<div>
 							<Nav />
-							<main>
-								<p>Email must be valid </p>
-								Password must be at least 6 characters long
-								<p />
-								<Button
-									color={"secondary"}
-									size={"large"}
-									full-width={"true"}
-									href={"/dashboard"}
-									variant={"outlined"}
-								>
-									Back to Dashboard
-								</Button>
-							</main>
 						</div>
 					</div>
 				</div>
