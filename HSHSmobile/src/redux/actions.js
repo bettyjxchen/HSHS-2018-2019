@@ -455,5 +455,38 @@ function generateDate() {
     return today;
   }
 
+export function additionalResources() {
+    let today = new Date();
+    let day = today.getDay(); 
+    let resources = [];
+
+    // 0 Sunday, 1 Monday, ... 
+    if (day == 0) {
+        // Sunday  
+
+    } else if (day == 1){
+        // Monday 
+        
+    } else if (day == 2){
+        // Tuesday 
+
+    } else if (day == 3){
+        // Wednesday 
+
+    } else if (day == 4){
+        // Thursday
+        
+        resources.push({category: "Others", name: "Mass.gov", link: "https://www.mass.gov/economic-assistance-cash-benefits"},);
+        return(resources);
+
+    } else if (day == 5){
+        // Friday 
+
+    } else if (day == 6) {
+        // Saturday 
+
+    }
+
+}
 
 

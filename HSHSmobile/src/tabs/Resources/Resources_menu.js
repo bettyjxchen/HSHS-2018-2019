@@ -14,6 +14,7 @@ import { SearchBar } from 'react-native-elements';
 import {connect} from 'react-redux';
 import renderLoader from "../../modules/UI/renderLoader";
 import dupNavFix from '../../dupNavFix';
+import {additionalResources} from "../../redux/actions";
 
 const Icon = require('react-native-vector-icons/Ionicons');
 
@@ -85,7 +86,12 @@ class Resources_menu extends Component {
           {category: "Public Benefits", name: "Transitional Aid to Families with Dependent Children (TAFDC)", link: "https://www.mass.gov/service-details/check-tafdc-eligibility-and-how-to-apply"},
 
           {category: "Public Benefits", name: "Emergency Aid to the Elderly, Disabled, and Children (EAEDC)", link: "https://www.mass.gov/service-details/check-eaedc-eligibility-and-how-to-apply"},
+          
+          {category: "Others", name: "Mass.gov", link: "https://www.mass.gov/economic-assistance-cash-benefits"},     
         ];
+
+        // Pulls entries from function and appends to tab 
+        this.linkData = this.linkData.concat(additionalResources());
 
         this.categoriesMain = ["Emergency Shelters", "Housing", "Transportation",
                             "Crisis Hotline", "Domestic Violence",
