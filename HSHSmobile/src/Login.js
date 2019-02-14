@@ -36,6 +36,9 @@ import ActionItem_list from './tabs/ActionItems/ActionItem_list';
 import Interaction_new from './tabs/Interactions/Interaction_new';
 import Interaction_view from './tabs/Interactions/Interaction_view';
 
+// Supplies
+import Supplies from './tabs/Supplies/Supplies';
+
 // Resources
 import Resources_menu from './tabs/Resources/Resources_menu';
 import Resources_search from './tabs/Resources/Resources_search';
@@ -54,6 +57,7 @@ var checkinIcon // ios-list-outline
 var guestsIcon // ios-people-outline
 var resourcesIcon // ios-help-circle-outline
 var addIcon // ios-add-circle-outline
+var suppliesIcon
 
 export default class Login extends Component {
     constructor(props) {
@@ -141,6 +145,7 @@ export default class Login extends Component {
                     Icons.getImageSource('ios-people-outline', 30),
                     Icons.getImageSource('ios-help-circle-outline', 30),
                     Icons.getImageSource('ios-add-circle-outline', 30),
+                    Icons.getImageSource('ios-basket', 30),
                 ]
             ).then((values) => {
                 homeIcon = values[0];
@@ -149,6 +154,7 @@ export default class Login extends Component {
                 guestsIcon = values[3];
                 resourcesIcon = values[4];
                 addIcon = values[5];
+                suppliesIcon = values[6];
                 resolve(true);
             }).catch((error) => {
                 console.log(error);
@@ -160,17 +166,15 @@ export default class Login extends Component {
     startApp() {
         // this will start our app
         Navigation.registerComponent('Dashboard', () => Dashboard, store, Provider);
-        Navigation.registerComponent('Guest_list', () => Guest_list, store, Provider);
-        Navigation.registerComponent('Guest_view', () => Guest_view, store, Provider);
         Navigation.registerComponent('Resources_menu', () => Resources_menu, store, Provider);
         Navigation.registerComponent('Resources_search', () => Resources_search, store, Provider);
         Navigation.registerComponent('Info', () => Info, store, Provider);
-        Navigation.registerComponent('Guest_edit', () => Guest_edit, store, Provider);
         Navigation.registerComponent('ActionItem_list', () => ActionItem_list, store, Provider);
         Navigation.registerComponent('ActionItem_edit', () => ActionItem_edit, store, Provider);
         Navigation.registerComponent('ActionItem_view', () => ActionItem_view, store, Provider);
         Navigation.registerComponent('Interaction_new', () => Interaction_new, store, Provider);
         Navigation.registerComponent('Interaction_view', () => Interaction_view, store, Provider);
+        Navigation.registerComponent('Supplies', () => Supplies, store, Provider);
 
         Navigation.startTabBasedApp({
             tabs: [
@@ -181,23 +185,23 @@ export default class Login extends Component {
                     icon: homeIcon
                 },
                 {
-                    label: 'Action items',
+                    label: 'Action Items',
                     screen: 'ActionItem_list',
                     title: 'Action Items',
                     icon: actionItemIcon,
                 },
                 {
-                    label: 'Interaction',
+                    label: 'Interactions',
                     screen: 'Interaction_new',
                     title: 'Add Interaction',
-                    icon: checkinIcon,
+                    icon: addIcon,
                 },
-                {
-                    label: 'Guests',
-                    screen: 'Guest_list',
-                    title: 'Guests',
-                    icon: guestsIcon,
-                },
+                /*{
+                    label: 'Supplies',
+                    screen: 'Supplies',
+                    title: 'Add Supplies',
+                    icon: suppliesIcon,
+                },*/
                 {
                     label: 'Resources',
                     screen: 'Resources_menu',
