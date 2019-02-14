@@ -11,8 +11,10 @@ import {
     Alert,
     NativeModules,
     LayoutAnimation,
+    TouchableHighlight,
+    Image,
 } from 'react-native';
-import { List, ListItem, SearchBar, Button, Icon } from "react-native-elements";
+import { Header, List, ListItem, SearchBar, Button, Icon } from "react-native-elements";
 import firebase from "firebase";
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
@@ -224,17 +226,31 @@ class Dashboard extends Component {
     // I'm not sure if this is the best way to have logical statements within renders, but it's not the worst way!
     render() {
         return (
-            <View style={styles.buttonGroup}>
-                <Button
-                    buttonStyle = {styles.buttons}
-                    title='Submit Summary'
-                    onPress={() => {addSummary(this.state.text); this.Popup.show();}}
-                />
-                <Text>&nbsp;</Text> 
-                <Button
-                    buttonStyle = {styles.buttons}
-                    title='View Summary'
-                    onPress={() => {this._getSummary(); this.summaryPopup.show()}}
+            <View style={styles.buttonGroup}>              
+
+                <View style={{borderRadius: 100, overflow: 'hidden'}}>
+                    <TouchableHighlight onPress={() => { this.Popup.show();}} >
+                        <View style={styles.circle_button}>
+                            <Text style={styles.sub_text}>Submit</Text>
+                            <Text style={styles.button_text}>Summary</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
+
+                <Text>&nbsp;&nbsp;&nbsp;</Text> 
+                
+                <View style={{borderRadius: 20, overflow: 'hidden', marginTop: 20}}>
+                    <TouchableHighlight onPress={() => {this._getSummary(); this.summaryPopup.show()}}>
+                        <View style={{backgroundColor: "#929292",borderRadius: 20, height:60, width:300}}>
+                            <Text style={styles.view_text}>View</Text>
+                            <Text style={styles.button_text}>Summaries</Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
+                
+                <Image 
+                source={require('./logo.png')} 
+                style={{width:120,height: 90,position:'absolute',bottom:70}}
                 />
                 <Popup
                     title={"Submit Summary"}
@@ -274,12 +290,37 @@ const styles = StyleSheet.create({
         alignContent: 'center', 
         alignItems: 'center', 
         justifyContent: "center", 
-        paddingTop: 50, 
+        top:60,
+
     },
-    buttons : {
-        borderRadius: 15,  
-        backgroundColor: "#E74C3C",
+    circle_button: {
+        width: 192,
+        alignItems: 'center',
+        backgroundColor: '#CF0707',
+        borderRadius: 100,
+        height: 192,
+        borderWidth: 6, 
+        borderColor: '#CAC8C8',
+    },
+    sub_text: {
+        marginTop: 55,
+        color: "#FFFFFF",
+        fontSize: 25, 
+        fontWeight: "bold",
+    },
+    button_text: {
+        color: "#FFFFFF",
+        textAlign: "center",
+        fontSize: 25,
+    },
+    view_text: {
+        marginTop: 0,
+        textAlign: "center",
+        color: "#FFFFFF",
+        fontSize: 25, 
+        fontWeight: "bold",
     }
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(dupNavFix(Dashboard));
