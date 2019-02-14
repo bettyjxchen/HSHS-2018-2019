@@ -241,7 +241,7 @@ class Dashboard extends Component {
                 
                 <View style={{borderRadius: 20, overflow: 'hidden', marginTop: 20}}>
                     <TouchableHighlight onPress={() => {this._getSummary(); this.summaryPopup.show()}}>
-                        <View style={{backgroundColor: "#929292",borderRadius: 20, height:60, width:300}}>
+                        <View style={{backgroundColor: "#929292",borderRadius: 20, height:80, width:300}}>
                             <Text style={styles.view_text}>View</Text>
                             <Text style={styles.button_text}>Summaries</Text>
                         </View>
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     view_text: {
-        marginTop: 0,
+        marginTop: 5,
         textAlign: "center",
         color: "#FFFFFF",
         fontSize: 25, 
